@@ -1,0 +1,103 @@
+body {
+    /* height: 4000px; */
+    background-color: #fff!important;
+}
+header {
+    /* background-image: url('./img/hero.jpg'); */
+    background-image: url('./img/hero3.jpeg');
+    background-size: cover;
+
+}
+
+
+
+/* header > .overlay */
+.class-item .overlay {
+    z-index: 1000;
+    background: linear-gradient(0deg,#191c21 0,rgba(25,28,33,.5) 50%,rgba(25,28,33,0) 90%) 50% no-repeat;
+}
+header > .overlay {
+ background: linear-gradient(0deg,#000000 0,rgba(25,28,33,.5) 50%,rgba(25,28,33,0) 90%) 50% no-repeat;
+
+}
+
+.class-item .class-item-info {
+    z-index: 2000;
+}
+.class-item img{
+    transition: all .4s ease;
+}
+.class-item span {
+    font-size: 11px;
+}
+.class-item:hover img {
+    transform: scale(1.1);
+}
+.category-item {
+    background-color: rgb(13, 13, 14);
+    color: rgb(158, 160, 169);
+    /* transition: border-color .2s; */
+}
+
+.category-item.active {
+    color: #fff;
+    font-weight: bold;
+    border: 2px solid var(--bs-secondary);
+}
+
+.overlay-left {
+    background: linear-gradient(90deg,#000000 0,rgba(25,28,33,.5) 78%,rgba(25,28,33,-1) 90%) 50% no-repeat;
+    z-index: 1000;
+}
+
+.overlay-right {
+    background: linear-gradient(-90deg,#000000 0,rgba(25,28,33,.5) 78%,rgba(25,28,33,-1) 90%) 50% no-repeat;
+    z-index: 1000;
+}
+
+.swiper-button-next:after, .swiper-button-prev:after {
+    font-size: 15px!important;
+}
+.swiper-button-next, .swiper-button-prev {
+    width: 30px!important;
+    height: 30px!important;
+}
+
+.swiper-pagination-bullet {
+    width: 15px!important;
+    height: 5px!important;
+    border-radius: 0!important;
+    background: #eee!important;
+}
+/* .swiper-wrapper {
+    padding: 0px 9rem !important;
+} */
+
+.latest-class {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat; 
+    
+}
+
+
+.latest-class .overlay {
+    background: linear-gradient(0deg,#000000 0,rgba(25,28,33,.5) 50%,rgba(25,28,33,0) 90%) 50% no-repeat;
+
+    /* background: linear-gradient(to left, rgb(0, 0, 0) 12%, rgba(0, 0, 0, 0.9) 20%, rgba(0, 0, 0, 0) 45%) center center no-repeat; */
+
+}
+
+
+.join-us {
+    background-color: #222326;
+}
+.join-us-img {
+    transform: scale(1.2);
+}
+@media only screen and (max-width: 992px) {
+    .join-us-img {
+        transform: scale(1.2) translate(10px, -47px);
+    }
+}
+

@@ -1,0 +1,24 @@
+:root {
+    --plyr-color-main: var(--bs-secondary);
+}
+.plyr--video {
+    height: 100%;
+}
+.plyr__poster {
+    background-size: cover!important;
+}
+body::-webkit-scrollbar {
+    width: 0;
+}
+.epsiodes-list::-webkit-scrollbar, .left-side::-webkit-scrollbar {
+    width: .3em;
+  }
+   
+.epsiodes-list::-webkit-scrollbar-track, .left-side::-webkit-scrollbar-track {
+box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+.epsiodes-list::-webkit-scrollbar-thumb, .left-side::-webkit-scrollbar-thumb {
+background-color: var(--bs-secondary);
+/* outline: 1px solid slategrey; */
+}

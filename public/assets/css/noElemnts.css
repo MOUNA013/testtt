@@ -1,0 +1,197 @@
+.wrapper .container1 .one, .wrapper .container1 .two, .wrapper .container1 .three, .wrapper .container1 .circle, .wrapper .container1 {
+	 min-height: 120px; 
+}
+.wrapper .container1 .img{
+    position: absolute;
+    width: 163px;
+    top: 30%;
+    left: 72%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+}
+ .wrapper .container1 .one .content, .wrapper .container1 .two .content, .wrapper .container1 .three .content, .wrapper .container1 .circle .content, .wrapper .container1 .p404 .content {
+	 width: 75%;
+	 height: 100%;
+	 display: flex;
+	 justify-content: center;
+	 align-items: center;
+	 position: absolute;
+	 top: 30%;
+	 left: 50%;
+	 transform: translate(-50%, -50%);
+	 animation: content 0.8s cubic-bezier(1, 0.06, 0.25, 1) backwards;
+}
+
+ .wrapper .container1 .one .content .piece, .wrapper .container1 .two .content .piece, .wrapper .container1 .three .content .piece, .wrapper .container1 .circle .content .piece, .wrapper .container1 .p404 .content .piece {
+	 width: 200px;
+	 height: 80px;
+	 display: flex;
+	 position: absolute;
+	 border-radius: 80px;
+	 z-index: 1;
+	 animation: pieceLeft 8s cubic-bezier(1, 0.06, 0.25, 1) infinite both;
+}
+ @keyframes pieceLeft {
+	 50% {
+		 left: 80%;
+		 width: 10%;
+	}
+}
+ @keyframes pieceRight {
+	 50% {
+		 right: 80%;
+		 width: 10%;
+	}
+}
+@media screen and (max-width: 992px) {
+    .wrapper .container1 .one .content, .wrapper .container1 .two .content, .wrapper .container1 .three .content, .wrapper .container1 .circle .content, .wrapper .container1 .p404 .content{
+        width: 450px ;
+    }
+    .wrapper .container1 .img{
+        width: 157px;
+        left: 82%;
+    }
+
+}
+ @media screen and (max-width: 768px) {
+    .wrapper .container1 .one .content, .wrapper .container1 .two .content, .wrapper .container1 .three .content, .wrapper .container1 .circle .content, .wrapper .container1 .p404 .content{
+        width: 450px ;
+    }
+    .wrapper .container1 .img{
+        width: 130px;
+        left: 82%;
+    }
+
+}
+
+@media screen and (max-width: 568px) {
+    .wrapper .container1 .one .content, .wrapper .container1 .two .content, .wrapper .container1 .three .content, .wrapper .container1 .circle .content, .wrapper .container1 .p404 .content{
+        width: 328px;
+        left: 163px;
+    }
+    .wrapper .container1 .img{
+        width: 86px;
+        left: 7%;
+        top: 37%;
+    }
+    .wrapper .container1 .three{
+        display: none;
+    }
+
+} 
+@media screen and (max-width: 300px) {
+    .wrapper .container1 .one .content, .wrapper .container1 .two .content, .wrapper .container1 .three .content, .wrapper .container1 .circle .content, .wrapper .container1 .p404 .content{
+        width: 238px;
+        left: 141px;
+    }
+    .wrapper .container1 .img{
+        width: 86px;
+        left: -8%;
+    }
+    
+
+} 
+
+ @media screen and (max-width: 799px) {
+	 .wrapper .container1 .one .content:before {
+		 width: 300px;
+		 height: 300px;
+	}
+}
+ .wrapper .container1 .one .content .piece {
+	 background: linear-gradient(90deg, #ef7d00 13.7%, #f7c694 94.65%);
+}
+ .wrapper .container1 .one .content .piece:nth-child(1) {
+	 right: 15%;
+	 top: 18%;
+	 height: 30px;
+	 width: 120px;
+	 animation-delay: 0.5s;
+	 animation-name: pieceRight;
+}
+ .wrapper .container1 .one .content .piece:nth-child(2) {
+	 left: 15%;
+	 top: 45%;
+	 width: 150px;
+	 height: 50px;
+	 animation-delay: 1s;
+	 animation-name: pieceLeft;
+}
+ .wrapper .container1 .one .content .piece:nth-child(3) {
+	 left: 10%;
+	 top: 75%;
+	 height: 20px;
+	 width: 70px;
+	 animation-delay: 1.5s;
+	 animation-name: pieceLeft;
+}
+ .wrapper .container1 .two .content .piece {
+	 background: linear-gradient(90deg, #ffedc0 0%, #ef7d00 100%);
+}
+ .wrapper .container1 .two .content .piece:nth-child(1) {
+	 left: 0%;
+	 top: 25%;
+	 height: 40px;
+	 width: 120px;
+	 animation-delay: 2s;
+	 animation-name: pieceLeft;
+}
+ .wrapper .container1 .two .content .piece:nth-child(2) {
+	 right: 15%;
+	 top: 35%;
+	 width: 180px;
+	 height: 50px;
+	 animation-delay: 2.5s;
+	 animation-name: pieceRight;
+}
+ .wrapper .container1 .two .content .piece:nth-child(3) {
+	 right: 10%;
+	 top: 80%;
+	 height: 20px;
+	 width: 160px;
+	 animation-delay: 3s;
+	 animation-name: pieceRight;
+}
+ .wrapper .container1 .three .content .piece {
+	 background: #ef7d00;
+}
+ .wrapper .container1 .three .content .piece:nth-child(1) {
+	 left: 25%;
+	 top: 35%;
+	 height: 20px;
+	 width: 80px;
+	 animation-name: pieceLeft;
+	 animation-delay: 3.5s;
+}
+ .wrapper .container1 .three .content .piece:nth-child(2) {
+	 right: 10%;
+	 top: 55%;
+	 width: 140px;
+	 height: 40px;
+	 animation-name: pieceRight;
+	 animation-delay: 4s;
+}
+ .wrapper .container1 .three .content .piece:nth-child(3) {
+	 left: 40%;
+	 top: 68%;
+	 height: 20px;
+	 width: 80px;
+	 animation-name: pieceLeft;
+	 animation-delay: 4.5s;
+}
+
+@keyframes loop {
+	50% {
+		left: 80%;
+   }
+}
+.wrapper .container1 .two .content .piece:nth-child(2) {
+	 left: 15%;
+	 top: 25%;
+	 width: 150px;
+	 height: 150px;
+	 background: transparent;
+	animation-name: loop;
+	animation-delay: 1.5s;
+
+}

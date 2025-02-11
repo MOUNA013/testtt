@@ -1,0 +1,493 @@
+    .nav_link {
+        padding: .4rem .5rem;
+        font-size: 1rem; 
+        font-weight: 700;
+        border-radius: .25rem;
+        font-family: "montserrat", sans-serif;
+        color: #575757;
+    }
+
+    .nav_link:not(:first-child) {
+        font-weight: 500;
+    }
+
+    .nav_link:hover, .nav_link_active {
+        background-color: #fff;
+        color: var(--purple);
+    }
+    @media (max-width: 480px) {
+        .nav_link {
+            padding: .4rem .5rem;
+            font-size: .9rem; 
+        }
+    }
+
+    .hashtags a {
+        font-size: 13px;
+        border-radius: 5px;
+        border: 1px solid #fff;
+        font-family: 'Montserrat', sans-serif;
+        color: var(--purple);
+        font-weight: 500;
+        transition: all 0.3s ease;
+    }
+    
+    .hashtags a:hover {
+        background-color: #f5f5f5; /* Choisissez la couleur de fond souhaitée */
+    }
+    
+    .post {
+        outline: 2px solid transparent;
+        transition: all .1s ease-out;
+        background-color: #fff !important;
+    }
+    .post:active {
+        outline: 2px solid var(--purple);
+    }
+    .post:hover {
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px !important;
+    }
+
+    .link_detail:hover{
+        color: var(--purple) !important;
+    }
+    /* reactions */
+    .multiple_reactions_icons_container{
+        display: flex;
+        align-items: center;
+        flex-direction: row;	
+    }
+    .crayons_icon_container{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #f5f5f5;
+        border: 2px solid #ffffff;
+        border-radius: 15px;
+        margin-right: -0.75em;
+        width: 28px;
+        height: 28px;
+    }
+    .crayons-tag__filled{
+        color: var(--blue);
+        flex-shrink: 0;
+    }
+    /* .crayons-tag__prefix{
+        color: #a2fff1;
+        flex-shrink: 0;
+    } */
+    .comment, .reactions, .time_read, .save {
+        background-color: none;
+        display : flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.3rem ;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    .comment:hover , .reactions:hover{
+        background-color: #f2f2f2;
+        color: var(--purple);
+    }
+    .save:hover , .bg_hover:hover{
+        background-color: #ebecfc;
+    }
+
+    /* 3 dots hover */
+ 
+    .bg_hover {
+        padding: 0.3rem ;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    /* join community link */
+    #join_link{
+        font-size:25px;
+        font-weight: 900;
+        text-decoration: underline;
+        color: #3B49DF;
+    }
+
+    #join_link:hover{
+        color: var(--purple);
+    }
+
+
+
+    @media (max-width: 576px) { /* Small screens */
+        .reactions span, .comment span {
+            font-size: 0.8rem; /* Adjust font size for small screens */
+        }
+    }	
+
+    /* themes */
+    .theme {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        flex-direction: column;
+        gap: .5rem;
+    }
+
+    .theme-child {
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        width: 100%;
+        gap: 1rem;
+        font-family: 'Montserrat', sans-serif;
+        font-size: .9rem;
+        font-weight: 500;
+        cursor: pointer;
+        padding: 10px; /* Adjusted padding */
+        border-radius: 4px;
+    }
+
+    .theme-child:not(:last-child) {
+        border-bottom: .1px solid  #f2f2f2;
+    }
+
+    .theme-child:hover {
+        background-color: var(--light);  
+    }
+
+    .theme-child a:hover {
+        color: var(--blue) !important;
+    }
+    
+    .theme-child span {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+
+
+    /* Top contributors card */
+    .top-contributors-card {
+        background-color: #fff;
+        padding: 15px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        margin-bottom: 15px;
+    }
+
+    .top-contributors-profile {
+        display: flex;
+        align-items: center;
+        padding: 10px;
+        border-radius: 8px;
+        transition: background-color 0.3s ease;
+        cursor: pointer;
+        margin-bottom: 0.5rem;
+    }
+
+    .top-contributors-profile:not(:last-child) {
+        border-bottom: 1px solid #f2f2f2;
+    }
+
+    .top-contributors-profile img {
+        border-radius: 8px;
+        object-fit: cover;
+        width: 50px;
+        height: 50px;
+    }
+
+    .top-contributors-info {
+        margin-left: 1rem;
+    }
+
+    .top-contributors-info h5 {
+        color: #000;
+        font-size: 16px;
+        margin-bottom: 5px;
+    }
+
+    .top-contributors-stats {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .top-contributors-stat {
+        /* margin-right: 10px; */
+        display: flex;
+        align-items: center;
+        gap: .2rem
+    }
+
+    .top-contributors-stat:last-child {
+        margin-right: 0;
+    }
+
+    .top-contributors-stat-count {
+        font-size: 13px;
+        font-weight: 500;
+        color: #000;
+    }
+
+    .top-contributors-stat-label {
+        font-size: 12px;
+        color: #999;
+    }
+
+    /* Hover effect */
+    .top-contributors-profile:hover {
+        background-color: #f8f8f8;
+    }
+
+
+    /* post 3 dots dorpdown */
+    .crayons-dropdown {
+        position: absolute;
+        top: 100%;
+        right: 0px;
+        display: none;
+        min-width: 210px;
+        margin-top: .25rem;
+        z-index: 400;
+        color: rgb(23, 23, 23) !important;
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05), 0 0 0 1px rgba(0, 0, 0, 0.1);
+        padding: .3rem !important;
+        background: #fff;
+        border-radius: 0.375rem;
+        /* font-size: 16px;  */
+    }
+    crayons-dropdown ul {
+        cursor: pointer;
+    }
+    .crayons-dropdown li:not(:last-child) .crayons-link svg path {
+        stroke: #1a4080;
+    }
+    
+    .crayons-dropdown li:not(:last-child):hover .crayons-link svg path {
+        stroke: #fff !important;
+    }
+      
+    
+    .crayons-link {
+        display: flex;
+        align-items: center;
+        padding: .5rem;
+        gap: 1rem;
+        border-radius: 0.375rem;
+        color: #1a4080 !important;
+        font-size: 14px;
+        letter-spacing: normal;
+        cursor: pointer;
+    }
+    
+    .crayons-link .crayons-icon {
+        vertical-align: middle;
+        width: 1.5rem;
+        height: 1.5rem;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .crayons-icon {
+        fill: currentColor !important;
+    }
+    
+    .crayons-link:hover {
+        background-color: #F07F19;
+        color: #fff !important;
+    }
+    
+    .crayons-link .crayons-icon:hover .crayons-icon {
+        fill: #1a4080;
+    }
+    
+    
+    .crayons-icon {
+        vertical-align: bottom;
+    }
+
+    /* dropdown */
+    .crayons-dropdown hr {
+        border: 0.5px solid var(--divider);
+        margin: 8px;
+    }
+
+    .dropdown-btn {
+        border: none;
+        background-color: white;
+        padding: 0.3rem ;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    .dropdown-btn:hover , .dropdown-btn:focus {
+        background-color: #f2f2f2;
+    }
+
+    .dropdown-post {
+        position: relative;
+        display: inline-block;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        right: 0;
+        top: 105%;
+        background-color: #f1f1f1;
+        min-width: 160px;
+        overflow: auto;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+    }
+
+    .dropdown-content div {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+    }
+
+    .show {display: block;}
+    
+      
+      
+
+
+/* test self scrolling */
+/* #masterMain {
+    height: 90vh;
+    overflow: hidden;
+}
+
+#mainContent {
+    max-height: 100vh !important;
+    overflow: auto;
+    overflow: auto;
+
+}
+#leftside {
+    max-height: 100% !important;
+    overflow: auto;
+}
+#rightside {
+    max-height: 100% !important;
+    overflow: auto;
+}
+
+
+#mainContent::-webkit-scrollbar, #leftside::-webkit-scrollbar, #rightside::-webkit-scrollbar  {
+    width: 0;
+    height: 0;
+} */
+
+/* _______Community Slider Container_______ */
+.community-slider {
+    display: flex;
+    gap: 1rem;
+    justify-content: start;
+    overflow-x: auto;
+    overflow-y: hidden;
+    margin: 0.75rem 0 0 0;
+    scroll-snap-type: x mandatory; /* Snap scrolling for a smooth experience */
+}
+
+/* Hide scrollbar */
+.community-slider::-webkit-scrollbar {
+    display: none;
+}
+
+.community-slider {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+/* Link wrapping the entire community slide */
+.community-slide {
+    display: block; /* Ensure the anchor behaves like a block-level element */
+    text-decoration: none; /* Remove default underline */
+    color: inherit; /* Inherit the text color */
+}
+
+/* Slide Box */
+.community-slid-box {
+    position: relative;
+    width: 120px; /* Slightly larger for better visibility */
+    height: 120px;
+    scroll-snap-align: start; /* Snap each box to the start */
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.community-slid-box:hover {
+    transform: translateY(-5px); /* Lift effect on hover */
+}
+
+/* Community Image */
+.community-slid-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* Add zoom effect on hover */
+.community-slid-box:hover img {
+    transform: scale(1.05); /* Slight zoom */
+    opacity: 0.85;
+}
+
+/* Overlay */
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 8px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.community-slid-box .overlay {
+    opacity: 1;
+}
+
+/* Community Text (on hover) */
+.community-box-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6); /* Better text visibility */
+}
+
+.community-slid-box .community-box-text {
+    opacity: 1;
+}
+
+
+/* Ensuring mobile-friendliness */
+@media (max-width: 576px) {
+    .community-slid-box {
+        width: 90px;
+        height: 90px;
+    }
+
+    .community-box-text {
+        font-size: 14px;
+    }
+
+    .community-name {
+        font-size: 12px;
+    }
+}

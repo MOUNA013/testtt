@@ -1,0 +1,55 @@
+.category {
+    /* background-size: 100%; */
+    background-position: center;
+    background-size: cover;
+    height: 400px;
+    transition: background-size .5s ease;
+}
+
+.category-scolaire {
+    background-image: url('../../assets/images/banners/banner_acad.webp');
+}
+
+.category-langues {
+    background-image: url('../../assets/images/banners/banner_langues.webp');
+}
+
+.category-metier {
+    background-image: url('../../assets/images/banners/banner_metiers.webp');
+}
+
+.category-universitaire {
+    background-image: url('../../assets/images/banners/banner_universitaire.webp');
+}
+
+.category-softskills {
+    background-image: url('../../assets/images/banners/banner_soft.webp');
+}
+
+.category-concours {
+    background-image: url('../../assets/images/banners/banner_examens.webp');
+}
+
+.category>div {
+    z-index: 5;
+}
+
+.category::after {
+    position: absolute;
+    content: '';
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+@media only screen and (min-width: 768px) {
+    .category::after {
+        background: linear-gradient(to bottom, rgba(53, 113, 213, 0) 40%, rgb(26, 63, 127) 100%);
+    }
+}
+@media only screen and (max-width: 767px) {
+    .category::after {
+        background: linear-gradient(to bottom, rgba(53, 113, 213, 0) 20%, rgb(26, 63, 127) 100%);
+    }
+}

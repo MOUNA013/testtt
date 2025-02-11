@@ -1,0 +1,46 @@
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #2178bd !important;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+.nav-item .active {
+    font-size: larger;
+    border-radius: 0 !important;
+    color: #f07f19 !important;
+    background-color: white !important;
+    font-weight: bold;
+    border-color: white white orange white !important;
+}
+
+.nav-item .btn-gray {
+    font-size: larger;
+    border-radius: 0 !important;
+    color: #5c5776;
+    background-color: white !important;
+    font-weight: bold;
+    border-color: white white #5c5776 white;
+}
+
+.btn-gray:not(:disabled):not(.disabled).active:focus,
+.btn-gray:not(:disabled):not(.disabled):active:focus {
+    box-shadow: none;
+}
+
+.cover {
+    width: 110px;
+}

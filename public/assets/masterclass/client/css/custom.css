@@ -1,0 +1,136 @@
+/* custom.css */
+:root {
+    --bs-primary: #000000;   
+    --bs-secondary: #E32653; /* Custom secondary color */
+    --bs-secondary: #F07F19; /* Custom secondary color */
+    --bs-danger: #DD634D;
+    --bg-grey: #222326;
+
+    
+  }
+  
+  /* Override Bootstrap's default colors */
+  .btn-primary {
+    background-color: var(--bs-primary)!important;
+    border-color: var(--bs-primary);
+  }
+  
+  .btn-secondary {
+    background-color: var(--bs-secondary)!important;
+    /* border-color: var(--bs-secondary)!important; */
+    border-color: none!important;
+    color: #fff;
+  }
+  
+  .bg-primary {
+    background-color: var(--bs-primary)!important;
+  }
+  
+  .bg-secondary {
+    background-color: var(--bs-secondary)!important;
+  }
+  
+  .text-primary {
+    color: var(--bs-primary)!important;
+  }
+  
+  .text-secondary {
+    color: var(--bs-secondary)!important;
+  }
+  .btn-danger {
+    background-color: var(--bs-danger)!important;
+    border-color: var(--bs-danger);
+  }
+  
+  
+  .bg-danger {
+    background-color: var(--bs-danger)!important;
+  }
+  
+  
+  .text-danger {
+    color: var(--bs-danger)!important;
+  }
+
+  .btn-info {
+    background-color: var(--bs-info)!important;
+    border-color: var(--bs-info);
+  }
+  .bg-info {
+    background-color: var(--bs-info)!important; 
+  }
+  .text-info {
+    color: var(--bs-info)!important;  
+  }
+  .border-info {
+    border-color: var(--bs-info)!important;  
+  }
+.border-secondary {
+  border-color: var(--bs-secondary)!important;
+}
+.text-muted {
+  color: rgb(255, 255, 255)!important;
+  opacity: .8!important;
+}
+
+.my-7 {
+  margin: 7rem auto;
+}
+
+.my-8 {
+  margin: 8rem auto;
+}
+.my-9 {
+  margin: 9rem auto;
+}
+.my-6 {
+  margin: 6rem auto;
+}
+.my-11 {
+  margin: 11rem auto;
+}
+.my-12 {
+  margin: 12rem auto;
+}
+
+.mb-6 {
+  margin-bottom: 6rem;
+}
+.z-index-2 {
+  z-index: 2000;
+}
+.bg-grey {
+  background-color: var(--bg-grey);
+}
+
+.mt-9 {
+  margin-top: 9rem;
+}
+.mt-11 {
+  margin-top: 11rem;
+}
+
+.mt-12 {
+  margin-top: 12rem;
+}
+
+@media only screen and (min-width: 992px) {
+  .mb-lg-11 {
+      margin-bottom: 11rem!important;
+  }
+}
+
+.bg-muted {
+  background-color: #191C21;
+}
+
+.vh-75 {
+  height: 75vh;
+}
+
+.vh-90 {
+  height: 90vh;
+}
+.flex-shrink-2 {
+  flex-shrink: 2;
+}

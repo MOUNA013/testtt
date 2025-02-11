@@ -1,0 +1,105 @@
+#notifications, #notifications-mobile {
+    z-index: inherit;
+}
+/* Notifications */
+.notification-icon {
+    transition: all 0.2s ease-in-out; /* Smooth transition for hover and click effects */
+}
+
+.notification-icon:active {
+    transform: scale(0.9);
+}
+
+.notification-content {
+    width: 325px !important;
+    max-height: 230px !important;
+    overflow-y: auto;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.notification-item {
+    padding: 10px;
+    border-bottom: 1px solid #f1f1f1;
+    transition: background-color 0.3s;
+}
+
+.notification-item:hover .notification-text,
+.notification-item:hover .notification-date {
+    color: var(--purple) !important;
+}
+
+.notification-date {
+    font-size: 12px;
+    color: #888;
+}
+
+.mark-as-read {
+    border: none;
+    background: none;
+    font-size: 12px;
+    color: var(--lightpink-red) !important;
+    cursor: pointer;
+    transition: opacity 0.3s;
+}
+
+.mark-as-read:hover {
+    opacity: 0.7;
+}
+
+.more-notifications {
+    border: none;
+    background: none;
+    font-size: 12px;
+    color: var(--blue) !important;
+    cursor: pointer;
+    text-align: center;
+    transition: opacity 0.3s;
+}
+
+.more-notifications:hover {
+    opacity: 0.7;
+}
+
+/* Scrollbar styles */
+.notification-content::-webkit-scrollbar {
+    width: 6px;
+}
+.notification-icon {
+    cursor: pointer;
+}
+
+.mark-all-as-read {
+    border: none;
+    background: none;
+    font-size: 12px;
+    width: 100%;
+    text-align: center;
+    color: var(--blue) !important;
+    cursor: pointer;
+    transition: opacity 0.3s;
+}
+
+.mark-all-as-read:hover {
+    opacity: 0.7;
+}
+
+/* notification */
+
+.callusbtn-notification {
+    position: absolute;
+    top: 20px;
+    right: 60px;
+    z-index: 9999 !important;
+}
+
+.callusbtn-notification-mobile {
+    position: absolute;
+    top: 15px;
+    right: 60px;
+    z-index: 9999 !important;
+}
+
+/* notification */

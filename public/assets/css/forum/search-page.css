@@ -1,0 +1,40 @@
+.profile-img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+@media (max-width: 480px) {
+    .search-query {
+        font-size: .9rem;
+    }
+}
+.search-result-img {
+    border-radius: 50%;
+    object-fit: cover;
+    width: 50px; /* Default size */
+    height: 50px; /* Default size */
+}
+
+.search-result-img-small {
+    width: 40px; /* Adjust for smaller screens */
+    height: 40px; /* Adjust for smaller screens */
+}
+
+@media (max-width: 576px) {
+    .search-result-img {
+        width: 40px; /* Smaller image size for mobile */
+        height: 40px; /* Smaller image size for mobile */
+    }
+
+    .search-result-img-small {
+        width: 30px; /* Even smaller image size for narrower screens */
+        height: 30px; /* Even smaller image size for narrower screens */
+    }
+
+    .follow-btn {
+        font-size: 12px; /* Decrease font size for smaller screens */
+        padding: 2px 8px !important; /* Adjust button padding for smaller screens */
+    }
+}

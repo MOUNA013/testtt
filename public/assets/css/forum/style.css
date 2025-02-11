@@ -1,0 +1,256 @@
+
+/*______ arabic font_____ */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@100..900&display=swap');
+
+.Noto-Kufi-regular {
+    font-family: "Noto Kufi Arabic", sans-serif !important;
+    font-weight: 400 !important;
+    font-style: normal !important;
+}
+/*______ arabic font_____ */
+/* post */
+.post {
+    outline: 2px solid transparent;
+    transition: all .1s ease-out;
+    background-color: #fff !important;
+}
+.post:active {
+    outline: 2px solid var(--purple);
+}
+
+.post-title{
+    font-size: 1.25rem;
+    font-family: 'montserrat', sans-serif;
+    font-weight: bolder;
+    color: #000;
+    margin-bottom: 1rem;
+}
+.post-title:hover{
+    color: var(--purple) !important;
+}
+
+.post #postImageContainer {
+    width: 100%;
+    height: 100%;
+}
+
+.post #postImageContainer img {
+    width: 100%; 
+    height: 264px; 
+    object-fit: cover;   
+}
+
+
+@media only screen and (max-width: 768px) {
+    .post-title {
+        font-size: 1rem;
+    }
+    .post #postImageContainer img {
+        width: 100%; 
+        height: 200px; 
+        object-fit: cover;   
+    }
+}
+@media (max-width: 480px) {
+    .post #postImageContainer img {
+        width: 100%; 
+        height: 158px; 
+        object-fit: cover;   
+    }
+}
+.multiple_reactions_icons_container{
+    display: flex;
+    align-items: center;
+    flex-direction: row;	
+}
+.crayons-tag__filled{
+    color: var(--bue);
+    flex-shrink: 0;
+}
+.crayons-tag__prefix{
+    color: #a2fff1;
+    flex-shrink: 0;
+}
+.comment, .reactions, .time_read, .save {
+    background-color: none;
+    display : flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.3rem ;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.comment:hover , .reactions:hover{
+    background-color: #f2f2f2;
+}
+.save:hover , .bg_hover:hover{
+    background-color: #ebecfc;
+}
+
+/* 3 dots hover */
+
+.bg_hover {
+    padding: 0.3rem ;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* join community link */
+#join_link{
+    font-size:25px;
+    font-weight: 900;
+    text-decoration: underline;
+    color: #3B49DF;
+}
+
+#join_link:hover{
+    color: var(--purple);
+}
+
+
+/* save checkbox */
+.savecheckboxInput {
+    display: none;
+}
+.bookmark {
+    cursor: pointer;
+    background-color: transparent;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    margin-bottom: 0;
+}
+.svgIcon path {
+    stroke-dasharray: 200 0;
+    stroke-dashoffset: 0;
+    stroke: #555;
+    fill: transparent;
+    transition-delay: 0s;
+    transition-duration: 0.1s;
+}
+
+.savecheckboxInput:checked ~ .svgIcon path {
+    fill: #555;
+    animation: bookmark .2s linear;
+    transition-delay: .05s;
+}
+.bookmark:hover{
+    background-color: #ebecfc;
+}
+
+/* theme common repeated */
+/* themes */
+.theme {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+    gap: .5rem;
+}
+
+
+.theme-child {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    width: 100%;
+    gap: 1rem;
+    font-family: 'Montserrat', sans-serif;
+    font-size: .9rem;
+    font-weight: 500;
+    padding: 10px; /* Adjusted padding */
+    border-radius: 4px;
+
+}
+
+.theme-child:not(:last-child) {
+    border-bottom: .1px solid  #f2f2f2;
+}
+
+.theme-child:hover {
+    background-color: var(--light);  
+}
+.theme-child span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+
+/* create post card */
+.create-post-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column; 
+    min-height: 300px;
+    background-color: #fff;
+    border-radius: 0.25rem;
+}
+
+#create-community-link{
+    color: var(--lightpink-red) !important;
+}
+
+.rtl-text {
+    direction: rtl;
+    text-align: right;
+}
+
+/* navbar profile button */
+.navbar-profile-image {
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.crayons-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column; 
+    min-height: 300px;
+    background-color: #fff;
+    border-radius: 0.25rem;
+}
+#create-link{
+    color: var(--lightpink-red) !important;
+}
+
+/* create post button  */
+#create-post-mobile {
+    display: none;
+    opacity: 0;
+    transition: all 0.3s ease;
+
+}
+
+@media (max-width: 768px) {
+    #create-post-mobile {
+        color: #fff;
+        position: fixed;
+        bottom: 75px;
+        right: 20px;
+        z-index: 99;
+        text-align: center;
+        border-radius: 7px;
+        -moz-border-radius: 7px;
+        -webkit-border-radius: 7px;
+        -o-border-radius: 7px;
+        height: 50px;
+        width: 50px;
+        background-repeat: no-repeat;
+        background-position: center;
+        opacity: 1; /* Make it fully visible */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--purple);
+    }
+
+    #create-post-mobile svg {
+        padding: auto;
+    }
+}
+/* create post button  */
