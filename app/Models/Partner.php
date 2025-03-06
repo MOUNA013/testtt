@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Partner extends Model
 {
@@ -15,6 +16,10 @@ class Partner extends Model
         'phone',
         'address',
         'company_name',
-        'contact_person',
+        
     ];
+    public function contrats(): HasMany
+    {
+        return $this->hasMany(Contrat::class);
+    }
 }

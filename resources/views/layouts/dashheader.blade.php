@@ -36,7 +36,14 @@
                             <i class="bi bi-person"></i> 
                             <span class="side-menu__label">{{ __('Partenaires') }}</span>
                         </a>
-                    </li>                                      
+                    </li>
+                    <li>
+                        <a class="side-menu__item" href="{{ route('contrats.index') }}">
+                            <i class="fa fa-file-text-o me-2"></i>
+                            <span class="side-menu__label">{{ __('Contrats') }}</span>
+                        </a>
+                    </li>
+                                                         
                    
                     @if (!is_null(session('id')))
                     <li>

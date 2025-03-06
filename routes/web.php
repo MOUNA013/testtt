@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ContratController;
 use App\Http\Controllers\FactureController;
 use App\Http\Controllers\PartnerController;
 use Illuminate\Http\Request;
@@ -46,3 +47,4 @@ Route::get('/partenaire-dashboard', function () {
     return view('Partenaires.Partners');
 })->name('Partenaire.dashboard');
 
+Route::resource('contrats', ContratController::class);
