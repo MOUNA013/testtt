@@ -7,20 +7,17 @@ use Illuminate\Http\Request;
 
 class PartnerController extends Controller
 {
-    // Afficher la liste des partenaires
     public function index()
     {
         $partners = Partner::all();
-        return view('Partenaires.Show', compact('partners')); // Vue Show.blade.php
+        return view('Partenaires.Show', compact('partners')); 
     }
 
-    // Afficher le formulaire de création
     public function create()
     {
-        return view('Partenaires.CreatePartenairs'); // Vue CreatePartenairs.blade.php
+        return view('Partenaires.CreatePartenairs'); 
     }
 
-    // Enregistrer un nouveau partenaire
     public function store(Request $request)
     {
         $validatedData = $request->validate([
@@ -37,36 +34,31 @@ class PartnerController extends Controller
         return redirect()->route('partners.index')->with('success', 'Partenaire enregistré avec succès.');
     }
 
-    // Afficher les détails d'un partenaire
     public function show(Partner $partner)
     {
-        return view('Partenaires.DetailsPartner', compact('partner')); // Vue DetailsPartner.blade.php
+        return view('Partenaires.DetailsPartner', compact('partner')); 
     }
 
-    // Afficher le formulaire de modification
-    public function edit(Partner $partner)
-    {
-        return view('Partenaires.edit', compact('partner')); // Vue edit.blade.php (si elle existe)
-    }
+public function edit(Partner $partner)
+{
+    return view('Partenaires.edit', compact('partner')); 
+}
 
-    // Mettre à jour un partenaire
-    public function update(Request $request, Partner $partner)
-    {
-        $validatedData = $request->validate([
-            'name' => 'required|max:255',
-            'email' => 'required|email|unique:partners,email,' . $partner->id,
-            'phone' => 'nullable|string',
-            'address' => 'nullable|string',
-            'company_name' => 'nullable|string',
-            'contact_person' => 'nullable|string',
-        ]);
+public function update(Request $request, Partner $partner)
+{
+    $validatedData = $request->validate([
+        'name' => 'required|max:255',
+        'email' => 'required|email|unique:partners,email,' . $partner->id,
+        'phone' => 'nullable|string',
+        'address' => 'nullable|string',
+        'company_name' => 'nullable|string',
+    ]);
 
-        $partner->update($validatedData);
+    $partner->update($validatedData);
 
-        return redirect()->route('partners.index')->with('success', 'Partenaire mis à jour avec succès.');
-    }
+    return redirect()->route('partners.index')->with('success', 'Partenaire mis à jour avec succès.');
+}
 
-    // Supprimer un partenaire
     public function destroy(Partner $partner)
     {
         $partner->delete();

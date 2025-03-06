@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
 <div class="col-xl-3 col-lg-12 col-md-12">
     <div class="card mb-2 user-select-none">
         <div class="card-header">
@@ -30,6 +31,12 @@
                             <span class="side-menu__label">{{ __('Factures') }}</span>
                         </a>
                     </li>
+                    <li>
+                        <a class="side-menu__item" href="{{ route('Partenaire.dashboard') }}">
+                            <i class="bi bi-person"></i> 
+                            <span class="side-menu__label">{{ __('Partenaires') }}</span>
+                        </a>
+                    </li>                                      
                    
                     @if (!is_null(session('id')))
                     <li>

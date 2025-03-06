@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Route;
 
 // Connexion et déconnexion
 Route::get('/connexion', [AuthController::class, 'getLogin'])->name('login.form');
-Route::post('/connexion', [AuthController::class, 'postLogin'])->name('login');
+Route::post('/Login', [AuthController::class, 'postLogin'])->name('login');
 Route::get('/deconnexion', function (Request $request) {
     $request->session()->flush();
     return redirect()->route('login.form');
@@ -40,5 +40,9 @@ Route::prefix('factures')->group(function () {
     Route::patch('/', [FactureController::class, 'update'])->name('factures.update');
     
     Route::delete('{id}', [FactureController::class, 'deleteFacture'])->name('factures.delete');
-    Route::resource( 'partners', PartnerController::class);
 });
+Route::resource( 'partners', PartnerController::class);
+Route::get('/partenaire-dashboard', function () {
+    return view('Partenaires.Partners');
+})->name('Partenaire.dashboard');
+

@@ -1,79 +1,91 @@
-@extends('layouts.app')
+@extends('layouts.back')
 
 @section('content')
     <style>
-        /* Style général de la page */
-        body {
-            font-family: 'Helvetica Neue', Arial, sans-serif;
-            background-color: #f9f9f9;
-            color: #333;
-            margin: 0;
-            padding: 0;
-        }
-
-        h1 {
-            font-size: 32px;
-            font-weight: bold;
-            color: #e67e22; /* Couleur orange */
-            text-align: center;
-            margin-top: 40px;
-        }
-
-        p {
-            font-size: 18px;
-            line-height: 1.6;
-            margin: 10px 0;
-        }
-
-        /* Style de la section principale */
+        /* Styles pour la page de détails du partenaire */
         .details-container {
-            max-width: 800px;
-            margin: 40px auto;
-            padding: 20px;
-            background-color: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
 
-        .details-container p {
-            background-color: #f4f7fc;
-            padding: 12px;
-            border-radius: 5px;
-            margin-bottom: 15px;
-            font-size: 16px;
-        }
-
-        .details-container p strong {
-            color: #e67e22; /* Couleur orange pour le texte en gras */
-        }
-
-        .back-link {
-            display: inline-block;
-            margin-top: 20px;
+        /* Style des titres */
+        .details-container h1 {
+            color: #2c3e50;
+            font-size: 2.5rem;
+            font-weight: bold;
             text-align: center;
-            padding: 12px 20px;
-            font-size: 18px;
-            background-color: #e67e22; /* Couleur orange pour le bouton */
-            color: #fff;
+            margin-bottom: 20px;
+        }
+
+        /* Style des paragraphes */
+        .partner-details p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        /* Style pour le bouton "Retour à la liste" */
+        .btn-back {
+            font-size: 1rem;
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: white;
             text-decoration: none;
             border-radius: 5px;
-            transition: background-color 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            margin-top: 20px;
         }
 
-        .back-link:hover {
-            background-color: #d35400; /* Couleur orange foncé au survol */
+        .btn-back:hover {
+            background-color: #2980b9;
+            text-decoration: none;
         }
 
+        .btn-back i {
+            margin-right: 8px;
+        }
+
+        /* Gérer la mise en page sur différentes tailles d'écran */
+        @media (max-width: 768px) {
+            .partner-details p {
+                font-size: 1rem;
+            }
+
+            .details-container {
+                padding: 20px;
+            }
+        }
     </style>
 
-    <div class="details-container">
-        <h1>{{ $partner->name }}</h1>
-        <p><strong>Email:</strong> {{ $partner->email }}</p>
-        <p><strong>Téléphone:</strong> {{ $partner->phone }}</p>
-        <p><strong>Adresse:</strong> {{ $partner->address }}</p>
-        <p><strong>Entreprise:</strong> {{ $partner->company_name }}</p>
-        <a href="{{ route('partners.index') }}" class="back-link">Retour à la liste</a>
-    </div>
-    {{-- @include('layouts.footer') --}}
+    <div class="container mt-5">
+        <div class="details-container card shadow-lg p-4 rounded bg-white">
+            <h1>{{ $partner->name }}</h1>
+            <div class="partner-details">
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <p><strong>Email:</strong> {{ $partner->email }}</p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>Téléphone:</strong> {{ $partner->phone }}</p>
+                    </div>
+                </div>
 
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <p><strong>Adresse:</strong> {{ $partner->address }}</p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>Entreprise:</strong> {{ $partner->company_name }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <a href="{{ route('partners.index') }}" class="btn btn-secondary btn-back">
+                <i class="bi bi-arrow-left-circle"></i> Retour à la liste
+            </a>
+        </div>
+    </div>
 @endsection
