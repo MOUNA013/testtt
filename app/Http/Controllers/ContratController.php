@@ -9,31 +9,26 @@ class ContratController extends Controller
 {
     public function index()
     {
-        $contrats = Contrat::all();
+        $contrats = Contrat::with('Partner')->get(); // Chargez la relation 'partner'
         return view('contrats.index', compact('contrats'));
     }
-
-// ContratController.php
 public function create()
 {
-    // Fetch the list of partners from the database
     $partenaires = Partner::all(); // Assuming you have a Partenaire model
 
-    // Pass the partners to the view
     return view('contrats.create', compact('partenaires'));
 }
 public function store(Request $request)
 {
     $validatedata = $request->validate([
         'numero_contrat' => 'required|unique:contrats',
-        'partners_id' => 'required',
+        'partners_id' => 'required|exists:partners,id',      
         'date_debut' => 'required|date',
         'date_fin' => 'required|date|after:date_debut',
         'montant' => 'required|numeric',
         'description' => 'nullable|string',
     ]);
 
-    // Add the authenticated user to the validated data
     $validatedata['user_id'] = auth()->id();
 
     Contrat::create($validatedata);
@@ -43,7 +38,6 @@ public function store(Request $request)
 }
 
 
-   // In ContratController.php
    public function show($id)
 {
     $contrat = Contrat::with('Partner')->findOrFail($id);
@@ -53,7 +47,7 @@ public function store(Request $request)
 
 public function edit(Contrat $contrat)
 {
-    $partenaires = Partner::all(); // Fetch all partners
+    $partenaires = Partner::all(); 
     return view('contrats.edit', compact('contrat', 'partenaires')); // Pass both contrat and partenaires to the view
 }
 

@@ -1,16 +1,9 @@
-<!-- resources/views/contrats/index.blade.php -->
-@extends('layouts.back') <!-- Assuming you have a layout file -->
+@extends('layouts.back')
 
 @section('content')
     <div class="container">
         <h1>Liste des Contrats</h1>
         <a href="{{ route('contrats.create') }}" class="btn btn-primary mb-3">Créer un nouveau contrat</a>
-
-        @if (session('success'))
-            <div class="alert alert-success">
-                {{ session('success') }}
-            </div>
-        @endif
 
         <table class="table table-bordered">
             <thead>
@@ -27,7 +20,7 @@
                 @foreach ($contrats as $contrat)
                     <tr>
                         <td>{{ $contrat->numero_contrat }}</td>
-                        <td>{{ $contrat->partenaire_id }}</td>
+                        <td>{{ $contrat->partner->name ?? 'No Partner Assigned' }}</td> <!-- Affichez le nom du partenaire -->
                         <td>{{ $contrat->date_debut }}</td>
                         <td>{{ $contrat->date_fin }}</td>
                         <td>{{ $contrat->montant }}</td>

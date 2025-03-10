@@ -1,5 +1,4 @@
 <?php
-
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -16,10 +15,6 @@ class CreateContratsTable extends Migration
         Schema::create('contrats', function (Blueprint $table) {
             // Colonne ID (clé primaire)
             $table->id();
-            Schema::table('contrats', function (Blueprint $table) {
-                $table->unsignedBigInteger('user_id')->nullable(); // Make sure the user_id can be null
-            });
-            
 
             // Colonne pour le numéro de contrat (unique)
             $table->string('numero_contrat')->unique();
@@ -31,7 +26,7 @@ class CreateContratsTable extends Migration
                   ->on('users')
                   ->onDelete('cascade'); // Supprime les contrats si l'utilisateur est supprimé
 
-            // Colonne pour le partenaire (partenaire_id)
+            // Colonne pour le partenaire (partners_id)
             $table->unsignedBigInteger('partners_id');
             $table->foreign('partners_id')
                   ->references('id')

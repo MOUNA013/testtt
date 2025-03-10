@@ -26,7 +26,6 @@ class PartnerController extends Controller
             'phone' => 'nullable|string',
             'address' => 'nullable|string',
             'company_name' => 'nullable|string',
-            'contact_person' => 'nullable|string',
         ]);
 
         Partner::create($validatedData);

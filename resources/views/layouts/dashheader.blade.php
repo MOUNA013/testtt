@@ -19,11 +19,26 @@
         <aside class="app-sidebar doc-sidebar my-dash">
             <div class="app-sidebar__user clearfix">
                 <ul class="side-menu">
-                    <li>
-                        <a class="side-menu__item" href="{{ route('payment') }}">
-                            <i class="fa fa-sticky-note-o me-2"></i>
+                    <li class="side-menu__item {{ request()->routeIs('payments.*') ? 'active' : '' }}">
+                        <a class="side-menu__link" data-bs-toggle="collapse" href="#paymentsMenu" role="button" aria-expanded="false">
+                            <i class="fa fa-credit-card me-2"></i>
                             <span class="side-menu__label">{{ __('Paiements') }}</span>
+                            <i class="fa fa-angle-down"></i>
                         </a>
+                        <ul class="collapse {{ request()->routeIs('payments.*') ? 'show' : '' }}" id="paymentsMenu">
+                            <li>
+                                <a class="side-menu__item {{ request()->routeIs('payments.index') ? 'active' : '' }}" href="{{ route('payments.index') }}">
+                                    <i class="fa fa-list me-2"></i>
+                                    <span class="side-menu__label">{{ __('Liste des Paiements') }}</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="side-menu__item {{ request()->routeIs('payments.create') ? 'active' : '' }}" href="{{ route('payments.create') }}">
+                                    <i class="fa fa-plus me-2"></i>
+                                    <span class="side-menu__label">{{ __('Créer un Paiement') }}</span>
+                                </a>
+                            </li>
+                        </ul>
                     </li>
                     <li>
                         <a class="side-menu__item" href="{{ route('factures.index') }}">

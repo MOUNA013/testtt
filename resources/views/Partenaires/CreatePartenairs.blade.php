@@ -28,7 +28,7 @@
             </div>
 
             <div class="form-group mb-3">
-                <label for="company_name" class="form-label">Nom de l'Entreprise (si applicable) :</label>
+                <label for="company_name" class="form-label">Nom de l'Entreprise :</label>
                 <input type="text" name="company_name" id="company_name" class="form-control">
                 <small class="form-text text-muted">Si vous représentez une entreprise ou avez une activité professionnelle, veuillez indiquer son nom.</small>
             </div>

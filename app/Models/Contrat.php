@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Contrat extends Model
 {
@@ -15,11 +16,13 @@ class Contrat extends Model
         'montant',
         'description',
     ];
-   // In Contrat.php (the Contrat model)
-// Contrat.php (Model)
+   
 public function Partner()
 {
     return $this->belongsTo(Partner::class, 'partners_id');
 }
-
+public function payments(): HasMany
+{
+    return $this->hasMany(Payment::class);
+}
 }

@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ContratController;
 use App\Http\Controllers\FactureController;
+use App\Http\Controllers\PaimentController;
 use App\Http\Controllers\PartnerController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
@@ -23,9 +24,9 @@ Route::get('/', function () {
     return Redirect::route('login.form');
 });
 
-// Routes de paiement
-Route::get('payment', [FactureController::class, 'payments'])->name('payment');
-Route::get('payment/{payment}/validate', [FactureController::class, 'ValidatePayment'])->name('payment.validate');
+// // Routes de paiement
+// Route::get('payment', [FactureController::class, 'payments'])->name('payment');
+// Route::get('payment/{payment}/validate', [FactureController::class, 'ValidatePayment'])->name('payment.validate');
 
 // Routes des factures
 Route::prefix('factures')->group(function () {
@@ -48,3 +49,5 @@ Route::get('/partenaire-dashboard', function () {
 })->name('Partenaire.dashboard');
 
 Route::resource('contrats', ContratController::class);
+
+Route::resource('payments', PaimentController::class);

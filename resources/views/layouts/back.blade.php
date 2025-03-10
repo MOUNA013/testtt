@@ -136,16 +136,15 @@
             <div class="row">
                 @include('layouts.dashheader')
                 <div class="col-xl-9 col-lg-12 col-md-12">
-                    @if (session('success'))
-                    <div class="alert alert-success">
+                    @if(session('success'))
+                    <div id="successMessage" class="alert alert-success">
                         {{ session('success') }}
                     </div>
-                    @endif
-
-                    @if (session('error'))
-                    <div class="alert alert-danger">
-                        {{ session('error') }}
-                    </div>
+                    <script>
+                        setTimeout(function() {
+                            document.getElementById('successMessage').style.display = 'none';
+                        }, 1000);
+                    </script>
                     @endif
 
                     @yield('content')

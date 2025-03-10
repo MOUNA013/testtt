@@ -2,84 +2,147 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Contrat;
+use App\Models\Partner;
 use App\Models\Payment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\DB;
 
 class PaimentController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Affiche la liste des paiements.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        //
+        // Récupère tous les paiements avec les relations nécessaires
+        $payments = Payment::with(['user', 'contrat', 'verifiedBy', 'updatedBy'])->get();
+        return view('payments.index', compact('payments'));
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Affiche le formulaire de création d'un paiement.
      *
      * @return \Illuminate\Http\Response
      */
     public function create()
     {
-        //
+        $partenaires = Partner::all();
+        $contrats = Contrat::all();
+
+         // Assuming you have a Partenaire model
+
+        return view('payments.create', compact('partenaires','contrats'));
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Enregistre un nouveau paiement dans la base de données.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        //
+        // Validation des données du formulaire
+        $validatedData = $request->validate([
+            'user_id' => 'nullable|exists:users,id',
+            'contrat_id' => 'nullable|exists:contrats,id',
+            'montant' => 'required|numeric',
+            'payment_date' => 'required|date',
+            'payment_method' => 'required|string',
+            'num_transaction' => 'nullable|string',
+            'recu' => 'nullable|boolean',
+            'month' => 'nullable|string',
+            'sender' => 'nullable|string',
+            'verified_at' => 'nullable|date',
+            'verified_by' => 'nullable|exists:users,id',
+            'updated_by' => 'nullable|exists:users,id',
+            'update_justification' => 'nullable|string',
+            'notes' => 'nullable|string',
+        ]);
+
+        // Crée un nouveau paiement
+        Payment::create($validatedData);
+
+        // Redirige vers la liste des paiements avec un message de succès
+        return redirect::route('payments.index')->with('success', 'Paiement créé avec succès.');
     }
 
     /**
-     * Display the specified resource.
+     * Affiche les détails d'un paiement spécifique.
      *
-     * @param  \App\Models\Payment  $paiment
+     * @param  \App\Models\Payment  $payment
      * @return \Illuminate\Http\Response
      */
-    public function show(Payment $paiment)
+    public function show(Payment $payment)
     {
-        //
+        // Charge les relations nécessaires pour éviter les requêtes supplémentaires
+        $payment->load(['user', 'contrat', 'verifiedBy', 'updatedBy']);
+        return view('payments.show', compact('payment'));
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Affiche le formulaire de modification d'un paiement.
      *
-     * @param  \App\Models\Payment  $paiment
+     * @param  \App\Models\Payment  $payment
      * @return \Illuminate\Http\Response
      */
-    public function edit(Payment $paiment)
+    public function edit(Payment $payment)
     {
-        //
+        // Charge les relations nécessaires pour éviter les requêtes supplémentaires
+        $payment->load(['user', 'contrat', 'verifiedBy', 'updatedBy']);
+        return view('payments.edit', compact('payment'));
     }
 
     /**
-     * Update the specified resource in storage.
+     * Met à jour un paiement dans la base de données.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Payment  $paiment
+     * @param  \App\Models\Payment  $payment
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Payment $paiment)
+    public function update(Request $request, Payment $payment)
     {
-        //
+        // Validation des données du formulaire
+        $validatedData = $request->validate([
+            'user_id' => 'nullable|exists:users,id',
+            'contrat_id' => 'nullable|exists:contrats,id',
+            'montant' => 'required|numeric',
+            'payment_date' => 'required|date',
+            'payment_method' => 'required|string',
+            'num_transaction' => 'nullable|string',
+            'recu' => 'nullable|boolean',
+            'month' => 'nullable|string',
+            'sender' => 'nullable|string',
+            'verified_at' => 'nullable|date',
+            'verified_by' => 'nullable|exists:users,id',
+            'updated_by' => 'nullable|exists:users,id',
+            'update_justification' => 'nullable|string',
+            'notes' => 'nullable|string',
+        ]);
+
+        // Met à jour le paiement
+        $payment->update($validatedData);
+
+        // Redirige vers la liste des paiements avec un message de succès
+        return redirect::clearResolvedInstanceroute('payments.index')->with('success', 'Paiement mis à jour avec succès.');
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Supprime un paiement de la base de données.
      *
-     * @param  \App\Models\Payment  $paiment
+     * @param  \App\Models\Payment  $payment
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Payment $paiment)
+    public function destroy(Payment $payment)
     {
-        //
+        // Supprime le paiement
+        $payment->delete();
+
+        // Redirige vers la liste des paiements avec un message de succès
+        return redirect::route('payments.index')->with('success', 'Paiement supprimé avec succès.');
     }
 }
