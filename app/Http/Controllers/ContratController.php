@@ -21,13 +21,15 @@ public function create()
 public function store(Request $request)
 {
     $validatedata = $request->validate([
-        'numero_contrat' => 'required|unique:contrats',
-        'partners_id' => 'required|exists:partners,id',      
+        'partners_id' => 'required|exists:partners,id',
         'date_debut' => 'required|date',
         'date_fin' => 'required|date|after:date_debut',
-        'montant' => 'required|numeric',
-        'description' => 'nullable|string',
+        'Nombre_des_seances' => 'required|integer|min:1',
+        'Nombre_des_etudiants' => 'required|integer|min:1',
+        'Prix_par_seances' => 'required|numeric|min:0',
+        'Prix_totale' => 'required|numeric|min:0',
     ]);
+    
 
     $validatedata['user_id'] = auth()->id();
 
@@ -54,16 +56,18 @@ public function edit(Contrat $contrat)
 
     public function update(Request $request, Contrat $contrat)
     {
-        $request->validate([
-            'numero_contrat' => 'required|unique:contrats,numero_contrat,' . $contrat->id,
-            'partners_id' => 'required',
+        $validatedata = $request->validate([
+            'partners_id' => 'required|exists:partners,id',
             'date_debut' => 'required|date',
             'date_fin' => 'required|date|after:date_debut',
-            'montant' => 'required|numeric',
-            'description' => 'nullable|string',
+            'Nombre_des_seances' => 'required|integer|min:1',
+            'Nombre_des_etudiants' => 'required|integer|min:1',
+            'Prix_par_seances' => 'required|numeric|min:0',
+            'Prix_totale' => 'required|numeric|min:0',
         ]);
+        
 
-        $contrat->update($request->all());
+        $contrat->update($validatedata);
 
         return redirect()->route('contrats.index')
                          ->with('success', 'Contrat mis à jour avec succès.');

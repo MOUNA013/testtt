@@ -24,9 +24,9 @@ Route::get('/', function () {
     return Redirect::route('login.form');
 });
 
-// // Routes de paiement
-// Route::get('payment', [FactureController::class, 'payments'])->name('payment');
-// Route::get('payment/{payment}/validate', [FactureController::class, 'ValidatePayment'])->name('payment.validate');
+// Routes de paiement
+Route::get('payment', [FactureController::class, 'payments'])->name('payment');
+Route::get('payment/{payment}/validate', [FactureController::class, 'ValidatePayment'])->name('payment.validate');
 
 // Routes des factures
 Route::prefix('factures')->group(function () {
@@ -42,6 +42,10 @@ Route::prefix('factures')->group(function () {
     Route::patch('/', [FactureController::class, 'update'])->name('factures.update');
     
     Route::delete('{id}', [FactureController::class, 'deleteFacture'])->name('factures.delete');
+    Route::get('/partenaire/create', [FactureController::class, 'createPartenaire'])->name('factures.partenaire.create');
+    Route::get('/client/create', [FactureController::class, 'createClient'])->name('factures.client.create');
+    
+    
 });
 Route::resource( 'partners', PartnerController::class);
 Route::get('/partenaire-dashboard', function () {

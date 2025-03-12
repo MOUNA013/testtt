@@ -60,16 +60,21 @@
         }
     </style>
 
-    <div class="container mt-5">
-        <div class="details-container card shadow-lg p-4 rounded bg-white">
-            <h1>{{ $partner->name }}</h1>
-            <div class="partner-details">
+        <div class="card mb-2 user-select-none" style="border-radius: 7px; padding: 2px;">
+            <div class="card-header">
+                <h3 class="card-title">{{ $partner->name }}</h3>
+                <i class="fa fa-caret-down ms-auto d-xl-none" id="aside-control" role="button"></i>
+            </div>  
+            <div class="card-body text-start item-user border-bottom-0" style="font-size:17px">
                 <div class="row mb-3">
+                    <div class="col-md-6">
+                        <p><strong>Nom du Responsable:</strong> {{ $partner->Responsable }}</p>
+                    </div>
                     <div class="col-md-6">
                         <p><strong>Email:</strong> {{ $partner->email }}</p>
                     </div>
                     <div class="col-md-6">
-                        <p><strong>Téléphone:</strong> {{ $partner->phone }}</p>
+                        <p><strong>Téléphone du Responsable:</strong> {{ $partner->Tele_Responsable }}</p>
                     </div>
                 </div>
 
@@ -83,9 +88,8 @@
                 </div>
             </div>
 
-            <a href="{{ route('partners.index') }}" class="btn btn-secondary btn-back">
+            <a href="{{ route('partners.index') }}" class="text text-danger text-back mb-3 ps-3">
                 <i class="bi bi-arrow-left-circle"></i> Retour à la liste
             </a>
         </div>
-    </div>
 @endsection

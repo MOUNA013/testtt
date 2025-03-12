@@ -21,12 +21,14 @@ class PartnerController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'name' => 'required|max:255',
-            'email' => 'required|email|unique:partners,email',
-            'phone' => 'nullable|string',
-            'address' => 'nullable|string',
-            'company_name' => 'nullable|string',
+        'name' => 'required|max:255',
+        'Responsable' => 'required|string|max:255',
+        'Tele_Responsable' => 'required|string|max:20', 
+        'email' => 'required|email|unique:partners,email',
+        'address' => 'nullable|string',
+        'company_name' => 'nullable|string',
         ]);
+    
 
         Partner::create($validatedData);
 
@@ -47,6 +49,8 @@ public function update(Request $request, Partner $partner)
 {
     $validatedData = $request->validate([
         'name' => 'required|max:255',
+        'Responsable' => 'required|string|max:255',
+        'Tele_Responsable' => 'required|string|max:20', 
         'email' => 'required|email|unique:partners,email,' . $partner->id,
         'phone' => 'nullable|string',
         'address' => 'nullable|string',

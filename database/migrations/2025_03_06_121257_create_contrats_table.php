@@ -37,7 +37,6 @@ class CreateContratsTable extends Migration
             $table->date('date_debut');
             $table->date('date_fin');
 
-            // Colonne pour le montant
             $table->decimal('montant', 10, 2); // 10 chiffres au total, 2 décimales
 
             // Colonne pour la description (nullable)

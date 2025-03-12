@@ -170,6 +170,15 @@ class FactureController extends Controller
 
         return view('facture.index', compact('factures'));
     }
+    public function createPartenaire()
+    {
+        return view('facture.create-partenaire');
+    }
+
+    public function createClient()
+    {
+        return view('facture.create-client');
+    }
 
     public function payments(Request $request)
     {

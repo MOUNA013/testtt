@@ -133,8 +133,39 @@
                 <div class="col-xl-9 col-lg-12 col-md-12">
                     <div class="card mb-0" style="margin-bottom: 2% !important">
                         <div class="card-header">
-                            <h3 class="card-title">{{ __('factures') }}</h3>
+                            <h3 class="card-title">{{ __('Factures') }}</h3>
                         </div>
+
+
+
+                        
+                        <div class="menu-item text-end p-2 me-3 {{ request()->routeIs('factures.*') ? 'active' : '' }}">
+                            <a class="menu-link" data-bs-toggle="collapse" href="#facturesMenu" role="button" aria-expanded="false">
+                                <i class="fa fa-file-invoice me-2"></i>
+                                <span class="menu-label text-success">{{ __('Créer une Factures') }}</span>
+                                <i class="fa fa-angle-down text-success"></i>
+                            </a>
+                        </div>
+                        
+                        <div class="collapse  {{ request()->routeIs('Creer une facture.*') ? 'show' : '' }}" id="facturesMenu">
+                            <div class="menu-item text-end pe-1 {{ request()->routeIs('factures.partenaire.create') ? 'active' : '' }}">
+                                <a class="menu-link" href="{{ route('factures.partenaire.create') }}">
+                                    <i class="fa fa-plus me-2 text-dark"></i>
+                                    <span class="menu-label text-dark">{{ __('Facture Partenaire') }}</span>
+                                </a>
+                            </div>
+                        
+                            <div class="menu-item text-end pe-6 {{ request()->routeIs('factures.client.create') ? 'active' : '' }}">
+                                <a class="menu-link" href="{{ route('factures.client.create') }}">
+                                    <i class="fa fa-plus me-2 text-dark"></i>
+                                    <span class="menu-label text-dark">{{ __('Facture Client') }}</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        
+
+
                         <div class="card-body">
                             <div class="manged-ad table-responsive userprof-tab">
                                 <form method="GET" action="{{ route('factures.index') }}">

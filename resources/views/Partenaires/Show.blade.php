@@ -56,15 +56,22 @@
         }
 
     </style>
+<div  style="background-color: white; border-radius: 7px; padding: 2px;">
+    
+    <div class="card-header">
+        <h3 class="card-title">{{__('Liste des Partenaires')}}</h3>
+        <i class="fa fa-caret-down ms-auto d-xl-none" id="aside-control" role="button"></i>
+    </div>
+  <div class="card-body text-start item-user border-bottom-0">
 
-    <h1>Liste des Partenaires</h1>
     <a href="{{ route('partners.create') }}" class="add-partner-link">Ajouter un Partenaire</a>
     <table class="partners-table">
         <thead>
             <tr>
                 <th>Nom</th>
+                <th>Responsable</th>
+                <th>Tele_Responsable</th>
                 <th>Email</th>
-                <th>Téléphone</th>
                 <th>Entreprise</th>
                 <th>Actions</th>
             </tr>
@@ -73,8 +80,9 @@
             @foreach ($partners as $partner)
                 <tr>
                     <td>{{ $partner->name }}</td>
+                    <td>{{ $partner->Responsable }}</td>
+                    <td>{{ $partner->Tele_Responsable }}</td>
                     <td>{{ $partner->email }}</td>
-                    <td>{{ $partner->phone }}</td>
                     <td>{{ $partner->company_name }}</td>
                     <td>
                         <a href="{{ route('partners.show', $partner->id) }}" class="action-link view-button">Voir</a>
@@ -89,6 +97,6 @@
             @endforeach
         </tbody>
     </table>
-    {{-- @include('layouts.footer') --}}
-
+  </div>  
+</div>
 @endsection
