@@ -18,11 +18,11 @@
             </div>
             <div class="form-group mb-3">
                 <label for="name" class="form-label">Nom du Responsable :</label>
-                <input type="text" name="name" id="name" class="form-control" required>
+                <input type="text" name="Responsable" id="Responsable" class="form-control" value="{{ old('name', $partner->Responsable) }}" required>
             </div> 
             <div class="form-group mb-3">
                 <label for="Tele_Responsable" class="form-label">Tele_Responsable :</label>
-                <input type="text" name="phone" id="phone" class="form-control">
+                <input type="text" name="Tele_Responsable" id="Tele_Responsable" value="{{ old('name', $partner->Tele_Responsable) }}"  class="form-control">
             </div>
             <div class="form-group mb-3">
                 <label for="email" class="form-label">Email :</label>

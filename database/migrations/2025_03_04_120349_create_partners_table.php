@@ -16,8 +16,9 @@ return new class extends Migration
         Schema::create('partners', function (Blueprint $table) {
             $table->id(); 
             $table->string('name'); 
+            $table->string('Responsable');
+            $table->string('Tele_Responsable');
             $table->string('email')->unique(); 
-            $table->string('phone')->nullable();
             $table->string('address')->nullable();
             $table->string('company_name')->nullable(); 
             $table->timestamps();
