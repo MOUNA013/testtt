@@ -30,6 +30,7 @@ public function store(Request $request)
         'Prix_totale' => 'required|numeric|min:0',
     ]);
     
+    
 
     $validatedata['user_id'] = auth()->id();
 
