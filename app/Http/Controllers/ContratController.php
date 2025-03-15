@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Contrat;
 use App\Models\Partner;
 use Illuminate\Http\Request;
+use Ramsey\Uuid\Guid\Guid;
 
 class ContratController extends Controller
 {
@@ -30,25 +31,22 @@ public function store(Request $request)
         'date_fin' => 'required|date|after:date_debut',
     ]);
 
-    $lastContrat = Contrat::latest('numero_contrat')->first();
-    $lastNumero = $lastContrat ? (int)substr($lastContrat->numero_contrat, -6) : 0;
-    $numero_contrat = 'CONTRAT-' . str_pad($lastNumero + 1, 6, '0', STR_PAD_LEFT);
-    $validatedata['numero_contrat'] = $numero_contrat;
-
     $validatedata['user_id'] = auth()->id();
-
+    
     Contrat::create($validatedata);
-
-    return redirect()->route('contrats.index')
-        ->with('success', 'Contrat créé avec succès.');
+    
+    return redirect()->route('contrats.index')->with('success', 'Contrat créé avec succès.');
 }
 
 
-   public function show($id)
+
+
+public function show(Contrat $contrat)
 {
-    $contrat = Contrat::with('Partner')->findOrFail($id);
     return view('contrats.show', compact('contrat'));
 }
+
+
 
 
 public function edit(Contrat $contrat)

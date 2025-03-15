@@ -11,14 +11,13 @@ class Contrat extends Model
 {
     use HasFactory;
 
+    use HasFactory;
+
     protected $primaryKey = 'numero_contrat';
-
-    public $incrementing = true;
-
+    public $incrementing = true; // Assurez-vous que cette ligne est présente
     protected $keyType = 'int';
 
     protected $fillable = [
-        'numero_contrat',
         'user_id',
         'partners_id',
         'Nombre_des_seances',
@@ -27,16 +26,16 @@ class Contrat extends Model
         'Prix_totale',
         'date_debut',
         'date_fin',
-        
     ];
+    
 
-   
-public function Partner()
-{
-    return $this->belongsTo(Partner::class, 'partners_id');
-}
-public function payments(): HasMany
-{
-    return $this->hasMany(Payment::class);
-}
+    public function partner(): BelongsTo
+    {
+        return $this->belongsTo(Partner::class, 'partners_id');
+    }
+    
+    public function payments(): HasMany
+    {
+        return $this->hasMany(Payment::class);
+    }
 }

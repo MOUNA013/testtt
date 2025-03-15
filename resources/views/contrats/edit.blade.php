@@ -7,7 +7,7 @@
         <i class="fa fa-caret-down ms-auto d-xl-none" id="aside-control" role="button"></i>
     </div>
     <div class="card-body text-center item-user border-bottom-0">
-        <form action="{{ route('contrats.update', $contrat->id) }}" method="POST">
+        <form action="{{ route('contrats.update', $contrat->numero_contrat) }}" method="POST">
             @csrf
             @method('PUT')
 

@@ -87,14 +87,15 @@
                             <td>{{ $contrat->Prix_par_seances }} DH</td>
                             <td>{{ $contrat->Prix_totale }} DH</td>
                             <td>
-                                <a href="{{ route('contrats.show', $contrat->numero_contrat) }}" class="btn btn-info btn-sm">Voir</a>
-                                <a href="{{ route('contrats.edit', $contrat->numero_contrat) }}" class="btn btn-warning btn-sm edit-button">Modifier</a>
-                                <form action="{{ route('contrats.destroy', $contrat->numero_contrat) }}" method="POST" style="display:inline;">
+                                <a href="{{ route('contrats.show', $contrat) }}" class="btn btn-info btn-sm">Voir</a>
+                                <a href="{{ route('contrats.edit', $contrat) }}" class="btn btn-warning btn-sm edit-button">Modifier</a>
+                                <form action="{{ route('contrats.destroy', $contrat) }}" method="POST" style="display:inline;">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger btn-sm delete-button" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce contrat ?')">Supprimer</button>
                                 </form>
-                            </td>
+
+                            </td>    
                         </tr>
                     @endforeach
                 </tbody>
