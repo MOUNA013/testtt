@@ -22,15 +22,18 @@ public function store(Request $request)
 {
     $validatedata = $request->validate([
         'partners_id' => 'required|exists:partners,id',
-        'date_debut' => 'required|date',
-        'date_fin' => 'required|date|after:date_debut',
         'Nombre_des_seances' => 'required|integer|min:1',
         'Nombre_des_etudiants' => 'required|integer|min:1',
         'Prix_par_seances' => 'required|numeric|min:0',
         'Prix_totale' => 'required|numeric|min:0',
+        'date_debut' => 'required|date',
+        'date_fin' => 'required|date|after:date_debut',
     ]);
-    
-    
+
+    $lastContrat = Contrat::latest('numero_contrat')->first();
+    $lastNumero = $lastContrat ? (int)substr($lastContrat->numero_contrat, -6) : 0;
+    $numero_contrat = 'CONTRAT-' . str_pad($lastNumero + 1, 6, '0', STR_PAD_LEFT);
+    $validatedata['numero_contrat'] = $numero_contrat;
 
     $validatedata['user_id'] = auth()->id();
 
@@ -59,12 +62,12 @@ public function edit(Contrat $contrat)
     {
         $validatedata = $request->validate([
             'partners_id' => 'required|exists:partners,id',
-            'date_debut' => 'required|date',
-            'date_fin' => 'required|date|after:date_debut',
             'Nombre_des_seances' => 'required|integer|min:1',
             'Nombre_des_etudiants' => 'required|integer|min:1',
             'Prix_par_seances' => 'required|numeric|min:0',
             'Prix_totale' => 'required|numeric|min:0',
+            'date_debut' => 'required|date',
+            'date_fin' => 'required|date|after:date_debut',
         ]);
         
 

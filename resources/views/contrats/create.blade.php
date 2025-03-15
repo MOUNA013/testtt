@@ -20,17 +20,6 @@
                     @endforeach
                 </select>
             </div>
-
-            <div class="form-group">
-                <label for="date_debut">Date de début</label>
-                <input type="date" name="date_debut" id="date_debut" class="form-control" required>
-            </div>
-
-            <div class="form-group">
-                <label for="date_fin">Date de fin</label>
-                <input type="date" name="date_fin" id="date_fin" class="form-control" required>
-            </div>
-
             <div class="form-group">
                 <label for="Nombre_des_seances">Nombre de séances</label>
                 <input type="number" name="Nombre_des_seances" id="Nombre_des_seances" class="form-control" min="1" required>
@@ -51,6 +40,17 @@
                 <input type="number" name="Prix_totale" id="Prix_totale" class="form-control" step="0.01" min="0" required>
             </div>
 
+            <div class="form-group">
+                <label for="date_debut">Date de début</label>
+                <input type="date" name="date_debut" id="date_debut" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label for="date_fin">Date de fin</label>
+                <input type="date" name="date_fin" id="date_fin" class="form-control" required>
+            </div>
+
+            
             <button type="submit" class="btn btn-primary mt-3">Créer</button>
         </form>
         </div>

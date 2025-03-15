@@ -13,11 +13,8 @@ class CreateContratsTable extends Migration
     public function up()
     {
         Schema::create('contrats', function (Blueprint $table) {
-            // Colonne ID (clé primaire)
-            $table->id();
 
-            // Colonne pour le numéro de contrat (unique)
-            $table->string('numero_contrat')->unique();
+            $table->bigIncrements('numero_contrat');  
 
             // Clé étrangère pour l'utilisateur (user_id)
             $table->unsignedBigInteger('user_id');
@@ -36,23 +33,14 @@ class CreateContratsTable extends Migration
             // Colonnes pour les dates de début et de fin
             $table->date('date_debut');
             $table->date('date_fin');
-
-            $table->decimal('montant', 10, 2); // 10 chiffres au total, 2 décimales
-
-            // Colonne pour la description (nullable)
-            $table->text('description')->nullable();
-
-            // Colonnes pour les timestamps (created_at et updated_at)
             $table->timestamps();
-
-            // Colonne pour le soft delete (deleted_at)
             $table->softDeletes();
         });
     }
 
     /**
      * Reverse the migrations.
-     *
+     *s
      * @return void
      */
     public function down()

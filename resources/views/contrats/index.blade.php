@@ -1,4 +1,5 @@
 @extends('layouts.back')
+
 <style>
     .contrats-table {
         width: 90%;
@@ -52,7 +53,6 @@
         border-radius: 4px;
         font-size: 14px;
     }
-
 </style>
 
 @section('content')
@@ -63,42 +63,42 @@
         </div>
         <a href="{{ route('contrats.create') }}" class=" text-start text-primary mb-3 mt-2 ps-5">Créer un nouveau contrat</a>
         <div class="card-body text-center item-user border-bottom-0">
-        <table class="contrats-table">
-            <thead>
-                <tr>
-                    <th>Partenaire</th>
-                    <th>Date de début</th>
-                    <th>Date de fin</th>
-                    <th>Nombre de séances</th>
-                    <th>Nombre d'étudiants</th>
-                    <th>Prix par séance</th>
-                    <th>Prix total</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($contrats as $contrat)
+            <table class="contrats-table">
+                <thead>
                     <tr>
-                        <td>{{ $contrat->partner->name ?? 'Aucun partenaire' }}</td>
-                        <td>{{ $contrat->date_debut }}</td>
-                        <td>{{ $contrat->date_fin }}</td>
-                        <td>{{ $contrat->Nombre_des_seances }}</td>
-                        <td>{{ $contrat->Nombre_des_etudiants }}</td>
-                        <td>{{ $contrat->Prix_par_seances }} DH</td>
-                        <td>{{ $contrat->Prix_totale }} DH</td>
-                        <td>
-                            <a href="{{ route('contrats.show', $contrat->id) }}" class="btn btn-info btn-sm">Voir</a>
-                            <a href="{{ route('contrats.edit', $contrat->id) }}" class="btn btn-warning btn-sm edit-button">Modifier</a>
-                            <form action="{{ route('contrats.destroy', $contrat->id) }}" method="POST" style="display:inline;">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-sm delete-button" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce contrat ?')">Supprimer</button>
-                            </form>
-                        </td>
+                        <th>Partenaire</th>
+                        <th>Date de début</th>
+                        <th>Date de fin</th>
+                        <th>Nombre de séances</th>
+                        <th>Nombre d'étudiants</th>
+                        <th>Prix par séance</th>
+                        <th>Prix total</th>
+                        <th>Actions</th>
                     </tr>
-                @endforeach
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    @foreach ($contrats as $contrat)
+                        <tr>
+                            <td>{{ $contrat->partner->name ?? 'Aucun partenaire' }}</td>
+                            <td>{{ $contrat->date_debut }}</td>
+                            <td>{{ $contrat->date_fin }}</td>
+                            <td>{{ $contrat->Nombre_des_seances }}</td>
+                            <td>{{ $contrat->Nombre_des_etudiants }}</td>
+                            <td>{{ $contrat->Prix_par_seances }} DH</td>
+                            <td>{{ $contrat->Prix_totale }} DH</td>
+                            <td>
+                                <a href="{{ route('contrats.show', $contrat->numero_contrat) }}" class="btn btn-info btn-sm">Voir</a>
+                                <a href="{{ route('contrats.edit', $contrat->numero_contrat) }}" class="btn btn-warning btn-sm edit-button">Modifier</a>
+                                <form action="{{ route('contrats.destroy', $contrat->numero_contrat) }}" method="POST" style="display:inline;">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger btn-sm delete-button" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce contrat ?')">Supprimer</button>
+                                </form>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
         </div>
     </div>
 @endsection
