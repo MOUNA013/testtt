@@ -177,7 +177,12 @@ class FactureController extends Controller
 
     public function createClient()
     {
-        return view('facture.create-client');
+       
+    $clients = DB::table('users')->get();
+    return view('facture.create-client', compact('clients'));
+
+
+        
     }
 
     public function payments(Request $request)
