@@ -9,7 +9,6 @@ class UpdateContratsTableAddAutoIncrement extends Migration
     public function up()
     {
         Schema::table('contrats', function (Blueprint $table) {
-            // Modifier le champ numero_contrat pour qu'il soit auto-increment
             $table->increments('numero_contrat')->change();
         });
     }

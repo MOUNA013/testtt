@@ -44,6 +44,9 @@ Route::prefix('factures')->group(function () {
     Route::delete('{id}', [FactureController::class, 'deleteFacture'])->name('factures.delete');
     Route::get('/partenaire/create', [FactureController::class, 'createPartenaire'])->name('factures.partenaire.create');
     Route::get('/client/create', [FactureController::class, 'createClient'])->name('factures.client.create');
+    Route::post('/{id}/sendEmail', [FactureController::class, 'sendEmail'])->name('factures.sendEmail');
+    Route::get('/generate/{id}', [FactureController::class, 'generatePDF'])->name('factures.generate');
+    Route::post('/partenaire/create', [FactureController::class, 'store'])->name('factures.store');
     
     
 });
