@@ -41,9 +41,11 @@ class Payment extends Model
 
     // Relation avec la facture
     public function facture()
-    {
-        return $this->hasOne(Facture::class);
-    }
+{
+    return $this->belongsTo(Facture::class, 'facture_id');
+}
+
+
 
     // Relation avec l'utilisateur qui a vérifié le paiement
     public function verifiedBy()

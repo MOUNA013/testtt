@@ -23,6 +23,7 @@ Route::get('/deconnexion', function (Request $request) {
 Route::get('/', function () {
     return Redirect::route('login.form');
 });
+// Route::resource('factures', FactureController::class);
 
 // Routes de paiement
 Route::get('payment', [FactureController::class, 'payments'])->name('payment');
@@ -40,7 +41,9 @@ Route::prefix('factures')->group(function () {
     Route::patch('/{id}/categories', [FactureController::class, 'updateCategory'])->name('factures.updateCategory');
     Route::patch('/{id}/reset', [FactureController::class, 'reset'])->name('factures.reset');
     Route::patch('/', [FactureController::class, 'update'])->name('factures.update');
-    
+
+    Route::post('/factures', [FactureController::class, 'store'])->name('factures.store');
+
     Route::delete('{id}', [FactureController::class, 'deleteFacture'])->name('factures.delete');
     Route::get('/partenaire/create', [FactureController::class, 'createPartenaire'])->name('factures.partenaire.create');
     Route::get('/client/create', [FactureController::class, 'createClient'])->name('factures.client.create');
@@ -55,3 +58,4 @@ Route::get('/partenaire-dashboard', function () {
 Route::resource('contrats', ContratController::class);
 
 Route::resource('payments', PaimentController::class);
+Route::get('/list', [FactureController::class, 'listFactures'])->name('factures.all');

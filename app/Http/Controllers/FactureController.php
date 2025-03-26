@@ -2,13 +2,17 @@
 
 namespace App\Http\Controllers;
 
+
+
 use App\Models\Facture;
 use App\Models\Payment;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
+
 
 class FactureController extends Controller
 {
@@ -144,46 +148,109 @@ class FactureController extends Controller
         return $string;
     }
 
+
     public function index(Request $request)
     {
         if (is_null(session('id'))) return redirect()->route('login');
-
-        $startOfPreviousMonth  = Carbon::now()->subMonth(2)->startOfMonth()->toDateString();
-        $endOfCurrentMonth  = Carbon::now()->endOfMonth()->toDateString();
-
-        // Get the 'from' and 'to' dates from the request, default to your desired dates
-        $fromDate = $request->input('from', $startOfPreviousMonth);
-        $toDate = $request->input('to', $endOfCurrentMonth);
-
-        $factures = Facture::with([
-            'User',
-            'Payment:id,payment_method,montant,num_transaction,created_at,verified_at,recu,sender,verified_by',
-        ])
+    
+        // Fetch factures with related data
+        $factures = Facture::with(['user', 'payment'])
             ->join('payments', 'factures.payment_id', '=', 'payments.id')
-            ->leftjoin('users as verifiers', 'payments.verified_by', '=', 'verifiers.id')
-            ->whereDate('payments.created_at', '>=', $fromDate)
-            ->whereDate('payments.created_at', '<=', $toDate)
+            ->leftJoin('users as verifiers', 'payments.verified_by', '=', 'verifiers.id')
+            ->whereDate('payments.created_at', '>=', $request->input('from', Carbon::now()->subMonth(2)->startOfMonth()->toDateString()))
+            ->whereDate('payments.created_at', '<=', $request->input('to', Carbon::now()->endOfMonth()->toDateString()))
             ->orderBy('payments.verified_at', 'asc')
             ->select('factures.*', 'verifiers.name as verifier_name')
             ->get();
-
-
+    
         return view('facture.index', compact('factures'));
     }
-    public function createPartenaire()
-    {
-        return view('facture.create-partenaire');
-    }
-
     public function createClient()
     {
        
     $clients = DB::table('users')->get();
-    return view('facture.create-client', compact('clients'));
-
-
+    $payements = DB::table('payments')->get();
+    return view('facture.create-client', compact('clients', 'payements'));
+}
+    
+    // public function index()
+    // {
+    //     $factures = Facture::with('client')->latest()->get();
+    //     return view('factures.index', compact('factures'));
+    // }
+   
+    public function store(Request $request)
+    {
+        // Validate incoming request data
+        $validated = $request->validate([
+            'user_id' => 'required|exists:users,id',  // Ensure user_id exists in the users table
+            'payment_id' => 'required|exists:payments,id',  // Ensure payment_id exists in the payments table
+            'payment_date' => 'required|date',  // Ensure payment_date is a valid date
+            'factureable_type' => 'required|string',  // Ensure factureable_type is a string
+            'numero_contrat' => 'required|integer',  // Ensure numero_contrat is an integer
+            'montant' => 'required|numeric',  // Ensure montant is numeric
+            // Add any other necessary validations...
+        ]);
+    
+        // Retrieve the payment record from the 'payments' table using the payment_id
+        $payment = Payment::find($validated['payment_id']);
         
+        // Check if the payment exists
+        if (!$payment) {
+            return redirect()->back()->with('error', 'Le paiement spécifié n\'existe pas.');
+        }
+    
+        // Retrieve the payment method from the payment record
+        $paymentMethod = $payment->payment_method;
+    
+        // Generate the invoice number (you can adjust this method as per your logic)
+        $factureNum = $this->generateFactureNumber(); 
+    
+        // Create the facture record and store it in the database
+        $facture = Facture::create([
+            'user_id' => $validated['user_id'],  // Store the user_id in the facture table
+            'payment_id' => $validated['payment_id'],  // Store the payment_id in the facture table
+            'facture_num' => $factureNum,  // Store the generated invoice number
+            'factureable_type' => $validated['factureable_type'],  // Store the factureable_type
+            'numero_contrat' => $validated['numero_contrat'],  // Store the contract number
+            'montant' => $payment->montant,  // Store the montant from the payment record
+            'payment_date' => $validated['payment_date'],  // Store the payment date
+            'payment_method' => $paymentMethod,  // Store the payment method
+            'intern' => $request->intern,  // Store the intern value (if applicable)
+            'client_name' => User::find($validated['user_id'])->name,  // Store the client's name
+        ]);
+    
+        // Redirect to the facture index page with a success message
+        return redirect()->route('factures.all')->with('success', 'Facture créée avec succès');
     }
+    public function listFactures()
+{
+    $factures = Facture::with(['payment', 'user'])->get();
+    return view('facture.index', compact('factures'));
+}
+    
+
+public function generateFactureNumber()
+{
+    // Obtenir l'année actuelle
+    $currentYear = date('Y');
+
+    // Récupérer le dernier numéro de facture créé (si nécessaire pour l'incrémentation)
+    $lastFacture = Facture::latest('id')->first();
+
+    // Si aucune facture n'existe, démarrer à partir de 1
+    $lastNumber = $lastFacture ? (int) substr($lastFacture->facture_num, -5) : 0;
+
+    // Incrémenter le dernier numéro
+    $newNumber = str_pad($lastNumber + 1, 5, '0', STR_PAD_LEFT); // Assure que le numéro est sur 5 chiffres
+
+    // Générer le nouveau numéro de facture
+    return $currentYear . $newNumber; // Exemple : 202500001
+}
+
+    
+
+
 
     public function payments(Request $request)
     {

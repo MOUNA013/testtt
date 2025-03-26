@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -41,4 +40,34 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    // Relation with payments (A user can have many payments)
+    public function payments()
+    {
+        return $this->hasMany(Payment::class);
+    }
+
+    // Relation with factures (A user can have many factures through payments)
+    public function factures()
+    {
+        return $this->hasManyThrough(Facture::class, Payment::class);
+    }
+
+    // Relation with contrats (A user can have many contrats)
+    public function contrats()
+    {
+        return $this->hasMany(Contrat::class);
+    }
+
+    // Relation with payments that were verified by the user
+    public function verifiedPayments()
+    {
+        return $this->hasMany(Payment::class, 'verified_by');
+    }
+
+    // Relation with payments that were updated by the user
+    public function updatedPayments()
+    {
+        return $this->hasMany(Payment::class, 'updated_by');
+    }
 }
