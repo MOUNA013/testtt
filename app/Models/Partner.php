@@ -23,4 +23,8 @@ class Partner extends Model
     {
         return $this->hasMany(Contrat::class);
     }
+    public function factures()
+    {
+        return $this->hasMany(Facture::class);
+    }
 }

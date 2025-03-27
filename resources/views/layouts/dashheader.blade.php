@@ -44,16 +44,21 @@
                         </a>
                     </li>
                                                          
-                   
                     @if (!is_null(session('id')))
                     <li>
-                        <a class="side-menu__item" href="/Logout"><i class="side-menu__icon fe fe-power"></i><span class="side-menu__label">{{__('logout')}}</span></a>
+                        <a class="side-menu__item" href="{{ route('logout') }}">
+                            <i class="side-menu__icon fe fe-power"></i>
+                            <span class="side-menu__label">{{ __('logout') }}</span>
+                        </a>
                     </li>
-                    @else
+                @else
                     <li>
-                        <a class="side-menu__item" href="/Login"><i class="side-menu__icon fa fa-sign-in"></i><span class="side-menu__label">{{__('Se connecter')}}</span></a>
+                        <a class="side-menu__item" href="/Login">
+                            <i class="side-menu__icon fa fa-sign-in"></i>
+                            <span class="side-menu__label">{{ __('Se connecter') }}</span>
+                        </a>
                     </li>
-                    @endif
+                @endif
                 </ul>
             </div>
         </aside>

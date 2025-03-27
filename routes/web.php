@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 // Connexion et déconnexion
 Route::get('/connexion', [AuthController::class, 'getLogin'])->name('login.form');
 Route::post('/Login', [AuthController::class, 'postLogin'])->name('login');
-Route::get('/deconnexion', function (Request $request) {
+Route::get('/logout', function (Request $request) {
     $request->session()->flush();
     return redirect()->route('login.form');
 })->name('logout');
@@ -31,6 +31,7 @@ Route::get('payment/{payment}/validate', [FactureController::class, 'ValidatePay
 // Routes des factures
 Route::prefix('factures')->group(function () {
     Route::get('/', [FactureController::class, 'index'])->name('factures.index');
+    Route::get('/list', [FactureController::class, 'listFactures'])->name('factures.list');
     Route::get('/generate/{paymentId}', [FactureController::class, 'generatePaymentFacture'])->name('factures.generate');
 
     Route::get('/print', [FactureController::class, 'print'])->name('facture.print');
@@ -42,13 +43,12 @@ Route::prefix('factures')->group(function () {
     Route::patch('/', [FactureController::class, 'update'])->name('factures.update');
     
     Route::delete('{id}', [FactureController::class, 'deleteFacture'])->name('factures.delete');
-    Route::get('/partenaire/create', [FactureController::class, 'createPartenaire'])->name('factures.partenaire.create');
     Route::get('/client/create', [FactureController::class, 'createClient'])->name('factures.client.create');
     Route::post('/{id}/sendEmail', [FactureController::class, 'sendEmail'])->name('factures.sendEmail');
     Route::get('/generate/{id}', [FactureController::class, 'generatePDF'])->name('factures.generate');
     Route::post('/partenaire/create', [FactureController::class, 'store'])->name('factures.store');
-    
-    
+    Route::get('/partenaire/create', [FactureController::class, 'create'])->name('factures.partenaire.create');
+    Route::post('/factures', [FactureController::class, 'store'])->name('factures.store');
 });
 Route::resource( 'partners', PartnerController::class);
 Route::get('/partenaire-dashboard', function () {

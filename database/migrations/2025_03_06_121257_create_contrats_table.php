@@ -13,7 +13,7 @@ class CreateContratsTable extends Migration
     public function up()
     {
         Schema::create('contrats', function (Blueprint $table) {
-
+            $table->engine = 'InnoDB'; 
             $table->bigIncrements('numero_contrat');  
 
             // Clé étrangère pour l'utilisateur (user_id)
@@ -21,14 +21,13 @@ class CreateContratsTable extends Migration
             $table->foreign('user_id')
                   ->references('id')
                   ->on('users')
-                  ->onDelete('cascade'); // Supprime les contrats si l'utilisateur est supprimé
-
+                  ->onDelete('cascade'); 
             // Colonne pour le partenaire (partners_id)
             $table->unsignedBigInteger('partners_id');
             $table->foreign('partners_id')
                   ->references('id')
                   ->on('partners')
-                  ->onDelete('cascade'); // Supprime les contrats si le partenaire est supprimé
+                  ->onDelete('cascade');
 
             // Colonnes pour les dates de début et de fin
             $table->date('date_debut');

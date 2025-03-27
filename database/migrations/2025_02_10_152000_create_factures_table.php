@@ -16,11 +16,18 @@ return new class extends Migration
         Schema::create('factures', function (Blueprint $table) {
             $table->id();
             $table->integer('facture_num')->nullable();
-            $table->foreignId('user_id')->constrained();
-            $table->foreignId('payment_id')->constrained();
-            $table->boolean('intern')->nullable();
-            $table->string('montant_enlettre')->nullable();
-            $table->string('client_name')->nullable();
+
+            // Clé étrangère vers la table partenaires
+            $table->foreignId('partner_id')->constrained('partners')->onDelete('cascade');
+            $table->foreignId('user_id')->nullable()->constrained('users')->onDelete('set null');
+            $table->foreignId('payment_id')->nullable()->constrained('payments')->onDelete('cascade');
+            // Autres colonnes
+            $table->string('code')->nullable(); 
+            $table->string('désignation')->nullable(); 
+            $table->string('mode_paiement')->nullable(); 
+            $table->string('emetteur')->nullable(); 
+            $table->decimal('prix', 8, 2)->nullable(); 
+
             $table->timestamps();
             $table->softDeletes();
         });

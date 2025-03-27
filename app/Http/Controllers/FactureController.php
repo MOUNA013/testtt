@@ -12,6 +12,7 @@ use App\Models\Partner;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Mail;
 use App\Models\FactureMail;
+use App\Models\User;
 
 class FactureController extends Controller
 {
@@ -177,7 +178,12 @@ class FactureController extends Controller
 
     public function createClient()
     {
-        return view('facture.create-client');
+       
+    $clients = DB::table('users')->get();
+    return view('facture.create-client', compact('clients'));
+
+
+        
     }
 
     public function payments(Request $request)
@@ -445,87 +451,47 @@ class FactureController extends Controller
             return response()->json(['status' => 'error', 'message' => 'Failed to verifiy payment.'], 500);
         }
     }
-    
-    public function createPartenaire()
+        public function deleteFacture($id)
     {
-        $factures = Facture::all(); 
-        $partenaires = Partner::all(); 
-
-        return view('facture.create-partenaire', compact('factures', 'partenaires'));
-    }
-
-    public function generatePDF($id)
-    {
-        $facture = Facture::findOrFail($id);
-        $pdf = Pdf::loadView('factures.pdf', compact('facture'));
-
-        return $pdf->download("Facture_{$facture->id}.pdf");
-    }
-    public function store(Request $request)
-    {
-        // Validation des données
-        $request->validate([
-            'facture_num' => 'required|integer|unique:facts,facture_num',
-            'user_id' => 'required|exists:users,id',
-            'payment_id' => 'required|exists:payments,id',
-            'intern' => 'nullable|boolean',
-            'montant_enlettre' => 'nullable|string',
-            'client_name' => 'nullable|string',
-        ]);
-
-        // Créer la facture
-        $facture = Facture::create([
-            'facture_num' => $request->facture_num,
-            'user_id' => $request->user_id,
-            'payment_id' => $request->payment_id,
-            'intern' => $request->intern,
-            'montant_enlettre' => $request->montant_enlettre,
-            'client_name' => $request->client_name,
-        ]);
-
-        // Retourner une réponse ou rediriger
-        return redirect()->route('factures.index')->with('success', 'Facture créée avec succès');
-    }
-
-    
-
-    public function sendEmail($id)
-    {
-        $facture = Facture::findOrFail($id);
-        $pdf = Pdf::loadView('factures.pdf', compact('facture'))->output();
-
-        Mail::send(new FactureMail($facture, $pdf));
-
-        return back()->with('success', 'Facture envoyée par e-mail.');
-    }public function create(Request $request)
-    {
-        // Validation des données
-        $request->validate([
-            'partenaire_id' => 'required|exists:partenaires,id',
-            'montant' => 'required|numeric',
-            'date_emission' => 'required|date',
-            'description' => 'nullable|string',
-        ]);
-    
-        // Création de la facture
-        $facture = new Facture();
-        $facture->user_id = auth()->user()->id;  // Assure-toi d'avoir une relation avec l'utilisateur
-        $facture->partenaire_id = $request->input('partenaire_id');
-        $facture->montant = $request->input('montant');
-        $facture->date_emission = $request->input('date_emission');
-        $facture->description = $request->input('description');
-        $facture->montant_enlettre = $this->convertToWords($request->input('montant')); // Si tu as une méthode pour convertir le montant en lettre
-    
-        // Sauvegarde dans la base de données
-        $facture->save();
-    
-        return redirect()->route('factures.index'); // Ou une autre route après la création
-    }
-    
-
-    public function deleteFacture($id)
-    {
-        Facture::whereId($id)->delete();
+        Facture::whereId($id)->forceDelete();
         return back();
     }
+    public function create()
+    {
+        $partners = Partner::all();  
+        $users = User::all();
+        $payments = Payment::all();
+
+        return view('facture.create-partenaire', compact('partners', 'users', 'payments'));
+    }
+   
+
+    public function store(Request $request)
+{
+    $validated = $request->validate([
+        'facture_num'   => 'nullable|string',
+        'partner_id'    => 'required|exists:partners,id',
+        'payment_id' => 'nullable|exists:payments,id', 
+        'désignation'       => 'nullable|string',
+
+    ]);
+
+    $facture = new Facture();
+    $facture->facture_num   = $validated['facture_num'];
+    $facture->partner_id    = $validated['partner_id'];
+    $facture->payment_id = $request->payment_id; 
+    $facture->désignation       = $validated['désignation'];
+    
+
+    $facture->user_id = auth()->user()->id;
+    $facture->save();
+
+    // Redirige vers la liste des factures pour actualiser la vue
+    return redirect()->route('factures.list')->with('success', 'Facture créée avec succès');
+}
+public function listFactures()
+{
+    $factures = Facture::with(['payment', 'user', 'partner'])->get();
+    return view('facture.index', compact('factures'));
+}
 }

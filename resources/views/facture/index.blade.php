@@ -193,55 +193,85 @@
                                     </thead>
                                     <tbody>
                                         @foreach ($factures as $facture)
-                                        <tr class="{{ !is_null($facture->intern) ? 'treated' : ''  }}" id="ID{{ $facture->id }}">
+                                        <tr class="{{ !is_null($facture->intern) ? 'treated' : '' }}" id="ID{{ $facture->id }}">
                                             <td class="align-middle">
                                                 <div class="row align-items-center">
                                                     <div class="col-lg-6 pe-0">
-                                                        <b class="text-uppercase">{{ __('id') }} :</b> {{ $facture->id  }} <br>
-                                                        <b class="text-uppercase">{{ __('N') }} :</b> {{ $facture->facture_num ?: ''  }} <br>
-                                                        <b class="text-lowercase">{{ __('client') }} &nbsp;:</b> <span class="text-truncate">{{ $facture->user->name }}</span> <br>
-                                                        <b class="text-lowercase">{{ __('article') }} &nbsp;:</b> <span class="text-primary">{{ $facture->factureable_type === 'App\Models\Cours' ? 'cours' : 'parcours'}} ({{ $facture->factureable_id }})</span> <br>
-                                                        <b class="text-lowercase">{{ __('Responsable de point') }} :</b> {{ $facture->verifier_name }}
+                                                        <b class="text-uppercase">{{ __('id') }} :</b> {{ $facture->id }} <br>
+                                                        <b class="text-uppercase">{{ __('N') }} :</b> {{ $facture->facture_num ?: '' }} <br>
+                                                        <b class="text-lowercase">{{ __('Partenaire') }} &nbsp;:</b>
+                                                            <span class="text-truncate">{{ $facture->partner->name }}</span> <br>
+                                                        <b class="text-lowercase">{{ __('désignation') }} &nbsp;:</b>
+                                                            <span class="text-primary">
+                                                                {{ $facture->désignation}}()
+                                                            </span> 
+                                                            {{ $facture->verifier_name }} <br>
+                                                           
                                                     </div>
                                                     <div class="col-lg-6 pe-0">
-                                                        <b class="text-lowercase">{{ __('code') }} &nbsp;:</b> {{ $facture->payment->num_transaction }} <br>
-                                                        <b class="text-lowercase">{{ __('prix') }} :</b> {{ $facture->payment->montant }} {{ __('MAD') }} <br />
-                                                        <b class="text-lowercase">{{ __('mode paiement') }} :</b> {{ __($facture->payment->payment_method) ?? __('vir')}} <br />
-                                                        <b class="text-lowercase">{{ __('emetteur') }} :</b> {{ __($facture->payment->sender)}}
-                                                        @if($facture->category) <br /><b class="text-lowercase">{{ __('partenaire') }} :</b> {{ $facture->category->prefix }} @endif
+                                                     @if($facture->payment)
+                                                     <b class="text-lowercase">{{ __('code') }} &nbsp;:</b>
+
+                                                            {{ $facture->payment->num_transaction }}
+                                                       
+                                                        <br>                                                        <b class="text-lowercase">{{ __('prix') }} :</b> {{ $facture->payment->montant }} {{ __('MAD') }} <br />
+                                                        <b class="text-lowercase">{{ __('mode paiement') }} :</b> {{ __($facture->payment->payment_method) ?? __('vir') }} <br />
+                                                        <b class="text-lowercase">{{ __('emetteur') }} :</b> {{ __($facture->payment->sender) }}
+                                                        @if($facture->category)
+                                                            <br /><b class="text-lowercase">{{ __('partenaire') }} :</b> {{ $facture->category->prefix }}
+                                                        @endif
+                                                        
                                                     </div>
                                                 </div>
                                             </td>
-
-                                            <td class="align-middle">{{ date('Y-m-d', strtotime($facture->payment->verified_at ?? $facture->payment->created_at)) }}</td>
-
+                                        
+                                            <td class="align-middle">
+                                                {{ date('Y-m-d', strtotime($facture->payment->verified_at ?? $facture->payment->created_at)) }}
+                                            </td>
+                                            
                                             <td data-facture-id="{{ encrypt($facture->id) }}" class="text-center align-middle">
                                                 <div class="d-flex flex-wrap justify-content-center">
                                                     @if(!is_null($facture->intern) ? 'treated' : '')
-                                                    <form action="{{ route('factures.reset', $facture->id) }}" method="POST" class="d-inline mb-1">
-                                                        @csrf
-                                                        @method('PATCH')
-                                                        <button class="btn btn-outline-warning btn-sm"><i class="fa fa-rotate-left"></i></button>
-                                                    </form>
+                                                        <form action="{{ route('factures.reset', $facture->id) }}" method="POST" class="d-inline mb-1">
+                                                            @csrf
+                                                            @method('PATCH')
+                                                            <button class="btn btn-outline-warning btn-sm">
+                                                                <i class="fa fa-rotate-left"></i>
+                                                            </button>
+                                                        </form>
                                                     @endif
                                                     @if($facture->payment->recu)
-                                                    <a href="/payments/{{ encrypt($facture->payment->id) }}/recu" target="_blank" class="btn btn-outline-secondary btn-sm me-1 mb-1">{{ __('voir reçu') }}</a>
+                                                        <a href="/payments/{{ encrypt($facture->payment->id) }}/recu" target="_blank"
+                                                           class="btn btn-outline-secondary btn-sm me-1 mb-1">
+                                                            {{ __('voir reçu') }}
+                                                        </a>
                                                     @endif
                                                     <div class="w-100"></div>
                                                     <div class="d-flex">
-                                                        <button class="btn btn-outline-secondary btn-sm me-1" onclick="editFacture({{$facture->id}})"><i class="fa fa-edit"></i></button>
+                                                        <button class="btn btn-outline-secondary btn-sm me-1" onclick="editFacture({{ $facture->id }})">
+                                                            <i class="fa fa-edit"></i>
+                                                        </button>
                                                         @if($facture->facture_num)
-                                                        <a href="/factures/print?id={{ encrypt($facture->id) }}" target="_blank" class="btn btn-outline-secondary btn-sm me-1"><i class="fa fa-download"></i></a>
+                                                            <a href="/factures/print?id={{ encrypt($facture->id) }}" target="_blank"
+                                                               class="btn btn-outline-secondary btn-sm me-1">
+                                                                <i class="fa fa-download"></i>
+                                                            </a>
                                                         @endif
                                                         <form action="{{ route('factures.delete', $facture->id) }}" method="POST" class="d-inline">
                                                             @csrf
                                                             @method('DELETE')
-                                                            <button class="btn btn-outline-danger btn-sm" onclick="deleteFacture(event)"><i class="fa fa-trash"></i></button>
+                                                            <button class="btn btn-outline-danger btn-sm" onclick="deleteFacture(event)">
+                                                                <i class="fa fa-trash"></i>
+                                                            </button>
                                                         </form>
                                                     </div>
                                                 </div>
+                                                @else
+                                            <span class="text-danger">Non disponible</span>
+                                         @endif
                                             </td>
                                         </tr>
+                                        
                                         @endforeach
                                     </tbody>
                                 </table>
@@ -285,7 +315,7 @@
                         </div>
                         <div class="d-flex mb-3">
                             <div class="px-0 w-100">
-                                <label for="mantantEnLettre" class="form-labem">{{ __('Mantant En lettre') }}</label>
+                                <label for="mantantEnLettre" class="form-labem">{{ __('Montant En lettre') }}</label>
                                 <input type="text" class="form-control" id="mantantEnLettre" name="mantantEnLettre">
                             </div>
                         </div>

@@ -10,22 +10,31 @@ class Facture extends Model
 {
     use HasFactory, SoftDeletes;
 
+    protected $table = 'factures';
+
+
     protected $fillable = [
-        'facture_num',
-        'user_id',
-        'payment_id',
-        'intern',
-        'montant_enlettre',
-        'client_name',
+        'facture_num', 'partner_id', 'user_id', 'payment_id', 'code', 
+        'désignation', 'responsable_de_point', 'mode_paiement', 'emetteur', 'prix'
     ];
+    public function partner()
+    {
+        return $this->belongsTo(Partner::class,'partner_id');
+    }
 
     public function User()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class,'user_id');
     }
 
-    public function Payment()
+    public function payment()
+{
+    return $this->belongsTo(Payment::class, 'payment_id');
+}
+
+    public function factureable()
     {
-        return $this->belongsTo(Payment::class);
+        return $this->morphTo();
     }
+
 }
